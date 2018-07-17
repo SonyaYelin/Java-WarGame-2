@@ -1,0 +1,23 @@
+2018-06-15T14:09:54.207: In Missile Launcher L102 ::run
+2018-06-15T14:09:54.21: Missile Launcher L102 has no missiles waiting
+2018-06-15T14:09:58.1: After adding missile #M3 there are 1 missiles waiting in L102
+2018-06-15T14:09:58.101: Missile #M3 is waiting to launch 
+2018-06-15T14:09:58.102: Missile Launcher L102 was notified there is a missile waiting
+2018-06-15T14:09:58.103: MissileLauncher L102 is notifying Missile #M3
+2018-06-15T14:09:58.105: MissileLauncher L102 waits that missile #M3 will land/be destructed
+2018-06-15T14:09:58.11: Missile #M3 started launch to Ofakim
+2018-06-15T14:09:58.111: Missile #M3 starts flying for 3 seconds
+2018-06-15T14:10:01.113: Missile #M3 missed target Ofakim
+2018-06-15T14:10:01.114: Missile Launcher L102 was announced that Missile #M3 is landed/destructed 
+2018-06-15T14:10:01.114: Missile Launcher L102 has no missiles waiting
+2018-06-15T14:10:03.101: After adding missile #M4 there are 1 missiles waiting in L102
+2018-06-15T14:10:03.101: Missile #M4 is waiting to launch 
+2018-06-15T14:10:03.102: Missile Launcher L102 was notified there is a missile waiting
+2018-06-15T14:10:03.102: MissileLauncher L102 is notifying Missile #M4
+2018-06-15T14:10:03.103: MissileLauncher L102 waits that missile #M4 will land/be destructed
+2018-06-15T14:10:03.103: Missile #M4 started launch to Beer-Sheva
+2018-06-15T14:10:03.104: Missile #M4 starts flying for 7 seconds
+2018-06-15T14:10:05.107: Missile #M4 was destructed
+2018-06-15T14:10:05.107: Missile #M4 missed target Beer-Sheva
+2018-06-15T14:10:05.109: Missile Launcher L102 was announced that Missile #M4 is landed/destructed 
+2018-06-15T14:10:05.11: Missile Launcher L102 has no missiles waiting
