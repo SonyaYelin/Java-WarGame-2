@@ -1,31 +1,41 @@
+
+
 package Logic;
 
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Vector;
 
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import Logger.GameLogger;
+import Logger.ToLog;
 import MVC.GameModelEventsListener;
 
 public class Game implements MissileLaunchListener,LauncherDestructListener,MissileDestructListener {
 
-	private HashMap<String, MissileLauncher> missileLaunchers;
-	private HashMap<String, MissileDestructor> missileDestructors;
-	private HashMap<String, MissileLauncherDestructor> missileLauncherDestructors;
-	private Vector<GameModelEventsListener> allListeners;
-	private static final int RANDOM_BOUND = 10;
-	final static int MAX_NUM_OF_MISSILE_LAUNCHER = 5;
-	final static int MAX_NUM_OF_MISSILE_LAUNCHER_DESTRUCTOR = 10;
-	final static int MAX_NUM_OF_MISSILE_DESTRUCTOR = 5;
+	private HashMap<String, MissileLauncher> 			missileLaunchers;
+	private HashMap<String, MissileDestructor> 			missileDestructors;
+	private HashMap<String, MissileLauncherDestructor>	missileLauncherDestructors;
+	private Vector<GameModelEventsListener> 			allListeners;
+	
+	private static final int 							RANDOM_BOUND = 10;
+	final static int 									MAX_NUM_OF_MISSILE_LAUNCHER = 5;
+	final static int 									MAX_NUM_OF_MISSILE_LAUNCHER_DESTRUCTOR = 10;
+	final static int 									MAX_NUM_OF_MISSILE_DESTRUCTOR = 5;
 
 	// singleton object
-	private static Game theGame;
+	private static Game 								theGame;
 
+	
 	private Game() {
 		allListeners = new Vector<GameModelEventsListener>();
 		missileLaunchers = new HashMap<String, MissileLauncher>();
 		missileDestructors = new HashMap<String, MissileDestructor>();
 		missileLauncherDestructors = new HashMap<String, MissileLauncherDestructor>();
+		GameLogger.removeConsoleHandler();
 		GameLogger.addFileHandler(this, "game");
 	}
 
@@ -34,8 +44,11 @@ public class Game implements MissileLaunchListener,LauncherDestructListener,Miss
 			// synchronized block to remove overhead
 			synchronized (Game.class) {
 				if (theGame == null) {
+					ApplicationContext theContext = new ClassPathXmlApplicationContext("spring.xml");
+					
 					// if theGame is null, initialize
-					theGame = new Game();
+					theGame = (Game) theContext.getBean("Game");
+					//theGame = new Game();
 				}
 			}
 		}
@@ -346,5 +359,9 @@ public class Game implements MissileLaunchListener,LauncherDestructListener,Miss
 		@Override
 		public void onDestructResult(LauncherDestructTarget target) {
 			fireLauncherDestructResult(target);
+		}
+		
+		public void test() {
+			
 		}
 	}

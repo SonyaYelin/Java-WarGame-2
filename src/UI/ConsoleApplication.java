@@ -21,9 +21,7 @@ public class ConsoleApplication implements GameUI {
 	public static void main(String[] args) {
 		ConsoleApplication console = new ConsoleApplication();
 		console.run();
-
 	}
-
 	
 	private void run() {
 		Scanner s = new Scanner(System.in);

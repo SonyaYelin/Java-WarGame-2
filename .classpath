@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/Liran/git/WarGameJava/jackson-core-2.2.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Liran/git/WarGameJava/jackson-annotations-2.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Liran/git/WarGameJava/com.fasterxml.jackson.databind.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/javax.annotation.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/spring/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/spring/spring-aop-4.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/spring/spring-aspects-4.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/spring/spring-beans-4.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/spring/spring-context-4.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/spring/spring-core-4.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/spring/spring-expression-4.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/aspect/aopalliance-1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/aspect/aspectjrt-1.6.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/aspect/aspectjweaver-1.6.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/com.fasterxml.jackson.databind.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/gson-2.6.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/jackson-annotations-2.1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/jackson-core-2.2.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/content.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/aspectj-1.9.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

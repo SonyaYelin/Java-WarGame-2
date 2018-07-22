@@ -7,10 +7,14 @@ import java.util.logging.Logger;
 
 public class GameLogger {
 
-    private static Logger logger = Logger.getLogger("war");
-
-    private static String LOG_FILES_PATH = "logs/";
-
+	private static Logger	logger = Logger.getLogger("war");
+    private static String	LOG_FILES_PATH = "logs/";
+    
+    
+	public static void removeConsoleHandler() {
+		logger.setUseParentHandlers(false);
+	}
+	
     public static void addFileHandler(Object fillerBy, String logFileName){
         FileHandler handler = null;
         try {
