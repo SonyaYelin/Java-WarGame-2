@@ -29,7 +29,7 @@ public class MissileDestructor implements MissileLaunchListener,Runnable {
 	public void setMissilesToDestruct(Map<String, Integer> missilesToDestruct) {
 		this.missilesToDestruct = missilesToDestruct;
 	}
-	public String getId() {
+	public String getID() {
 		return id;
 	}
 	

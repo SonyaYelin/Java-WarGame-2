@@ -54,7 +54,7 @@ public class Missile extends Thread implements Comparable<Missile> {
 				hitTarget=true;
 				//GameLogger.log(theLauncher, Level.INFO,"Missile #" + getMissileId() + " hit target "+ destination +" damage: "+ damage);
 			}
-			else
+			//else
 				//GameLogger.log(theLauncher, Level.INFO,"Missile #" + getMissileId() + " missed target "+ destination );
 
 			theLauncher.notify();

@@ -7,6 +7,7 @@ import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 
 import Logic.DestructTarget;
+import Logic.Game;
 import Logic.LauncherDestructTarget;
 import Logic.Missile;
 import Logic.MissileDestructor;
@@ -16,16 +17,22 @@ import Logic.MissileLauncherDestructor;
 @Aspect
 public class LogCalls {
    
+	static{
+		GameLogger.removeConsoleHandler();
+		GameLogger.addFileHandler(Game.getInstance(), "game");	
+	}
+	
+	//add
     @After("execution(@Logger.ToLog * addMissileLauncher(..))") 
     public void addMissileLauncher(JoinPoint theJoinPoint) {
     	MissileLauncher ml = (MissileLauncher) theJoinPoint.getArgs()[0];
-    	GameLogger.addFileHandler(ml, ml.getId());
+    	GameLogger.addFileHandler(ml, ml.getID());
     }
     
 	@After("execution(@Logger.ToLog * addMissileDestructor(..))") 
 	public void addMissileDestructor(JoinPoint theJoinPoint) {
     	MissileDestructor md = (MissileDestructor) theJoinPoint.getArgs()[0];
-    	GameLogger.addFileHandler(md, md.getId());
+    	GameLogger.addFileHandler(md, md.getID());
     }
 	
 	@After("execution(@Logger.ToLog * addLauncherDestructor(..))") 
@@ -34,12 +41,13 @@ public class LogCalls {
     	GameLogger.addFileHandler(mld, mld.getID());
     }
 	
+	//launch
 	
 	@After("execution(@Logger.ToLog * onMissileLaunchEvent(..))") 
 	public void onMissileLaunchEvent(JoinPoint theJoinPoint) {
     	Missile m = (Missile) theJoinPoint.getArgs()[0];
     	MissileLauncher ml = m.getTheLauncher();
-    	GameLogger.log(ml, Level.INFO, "missile-launcher #" + ml.getId() + " launched missile #" + m.getMissileId() );
+    	GameLogger.log(ml, Level.INFO, "missile-launcher #" + ml.getID() + " launched missile #" + m.getMissileId() );
     }
 	
 	@After("execution(@Logger.ToLog * onMissileLandEvent(..))") 
@@ -48,7 +56,7 @@ public class LogCalls {
     	MissileLauncher ml = m.getTheLauncher();
 
     	GameLogger.log(ml, Level.INFO, "missile #" + m.getMissileId() 
-    				+ " launched by missile-launcher #" + ml.getId() 
+    				+ " launched by missile-launcher #" + ml.getID() 
     				+ " landed, hit target: " + m.isHitTarget()
     				+ " is detructd: " + m.isDestructed());
     }
@@ -75,7 +83,7 @@ public class LogCalls {
 		DestructTarget dt = (DestructTarget) theJoinPoint.getArgs()[0];
     	MissileDestructor md = dt.getDestructor();
 
-    	GameLogger.log(md, Level.INFO, "missile-destructor #" + md.getId() + " just started destructing missile #" + dt.getTarget().getMissileId());
+    	GameLogger.log(md, Level.INFO, "missile-destructor #" + md.getID() + " just started destructing missile #" + dt.getTarget().getMissileId());
     }
 	
 	@After("execution(@Logger.ToLog * onMissileDestructResult(..))") 
@@ -83,7 +91,7 @@ public class LogCalls {
 		DestructTarget dt = (DestructTarget) theJoinPoint.getArgs()[0];
     	MissileDestructor md = dt.getDestructor();
 
-    	GameLogger.log(md, Level.INFO, "missile-destructor #" + md.getId() 
+    	GameLogger.log(md, Level.INFO, "missile-destructor #" + md.getID() 
     							+ " finished destructing missile #" + dt.getTarget().getMissileId()
     							+ "is destructed: " + dt.getTarget().isDestructed());
     }

@@ -1,7 +1,5 @@
 package Logic;
 
-import java.util.logging.Level;
-
 
 public class LauncherDestructTarget extends Thread {
 	private MissileLauncher target;
@@ -15,7 +13,7 @@ public class LauncherDestructTarget extends Thread {
 		this.start();
 	}
 	public String getTargetID() {
-		return target.getId();
+		return target.getID();
 	}
 	
 	public String getType() {
@@ -42,7 +40,7 @@ public class LauncherDestructTarget extends Thread {
 				target.setIsDestroyed(true);
 				//GameLogger.log(theDestructor, Level.INFO,"Missile Launcher Desturctor "+theDestructor.getType() +" destoryed "+target.getId());
 			}
-			else
+			//else
 				//GameLogger.log(theDestructor, Level.INFO,"Missile Launcher Desturctor "+theDestructor.getType() +" missed "+target.getId());
 			
 			theDestructor.notifyAllListenerResult(this);

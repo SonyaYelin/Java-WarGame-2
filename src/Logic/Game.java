@@ -7,7 +7,6 @@ import java.util.Vector;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import Logger.GameLogger;
 import Logger.ToLog;
 import MVC.GameModelEventsListener;
 
@@ -34,10 +33,10 @@ public class Game implements MissileLaunchListener, LauncherDestructListener, Mi
 		missileLaunchers = new HashMap<String, MissileLauncher>();
 		missileDestructors = new HashMap<String, MissileDestructor>();
 		missileLauncherDestructors = new HashMap<String, MissileLauncherDestructor>();
-		GameLogger.removeConsoleHandler();
-		GameLogger.addFileHandler(this, "game");
+		
 	}
 
+	@ToLog
 	public static Game getInstance() {
 		if (theGame == null) {
 			// synchronized block to remove overhead
@@ -58,7 +57,7 @@ public class Game implements MissileLaunchListener, LauncherDestructListener, Mi
 	public void addMissileLauncherFromConfig(MissileLauncher missileLauncher) {
 		try {
 			if (missileLaunchers.size() < MAX_NUM_OF_MISSILE_LAUNCHER
-					&& !missileLaunchers.containsKey(missileLauncher.getId())) {
+					&& !missileLaunchers.containsKey(missileLauncher.getID())) {
 				addMissileLauncher(missileLauncher);
 			} else
 				fireNotificationFailedAddMissileLauncher("Too Many Missile Launchers / already exist");
@@ -84,9 +83,9 @@ public class Game implements MissileLaunchListener, LauncherDestructListener, Mi
 	@ToLog
 	public void addMissileLauncher(MissileLauncher missileLauncher) {
 		try {
-			missileLaunchers.put(missileLauncher.getId(), missileLauncher);
+			missileLaunchers.put(missileLauncher.getID(), missileLauncher);
 			missileLauncher.registerListener(theGame);
-			fireAddMissileLauncher(missileLauncher.getId(), missileLauncher.isHidden());
+			fireAddMissileLauncher(missileLauncher.getID(), missileLauncher.isHidden());
 
 		} catch (Exception e) {
 			fireNotificationFailedAddMissileLauncher(e.getMessage());
@@ -96,7 +95,7 @@ public class Game implements MissileLaunchListener, LauncherDestructListener, Mi
 	public void addMissileDestructorFromConfig(MissileDestructor destructor) {
 		try {
 			if (missileDestructors.size() < MAX_NUM_OF_MISSILE_DESTRUCTOR
-					&& !missileDestructors.containsKey(destructor.getId())) {
+					&& !missileDestructors.containsKey(destructor.getID())) {
 				addMissileDestructor(destructor);
 			} else
 				fireNotificationFailedAddMissileDestructor("Too Many Missile Destructors/already exist");
@@ -121,12 +120,12 @@ public class Game implements MissileLaunchListener, LauncherDestructListener, Mi
 
 	@ToLog
 	public void addMissileDestructor(MissileDestructor md) {
-		missileDestructors.put(md.getId(), md);
+		missileDestructors.put(md.getID(), md);
 		md.registerListener(theGame);
 		for (MissileLauncher launcher : missileLaunchers.values()) {
 			launcher.registerListener(md);
 		}
-		fireAddMissileDestructor(md.getId());
+		fireAddMissileDestructor(md.getID());
 	}
 
 	public void addLauncherDestructorFromConfig(MissileLauncherDestructor missileLauncherDestructor) {
@@ -272,7 +271,7 @@ public class Game implements MissileLaunchListener, LauncherDestructListener, Mi
 
 	private void fireMissileLaunch(Missile missile) {
 		for (GameModelEventsListener g : allListeners) {
-			g.launchMissileInModel(missile.getTheLauncher().getId(), missile.getMissileId(), missile.getDestination(),
+			g.launchMissileInModel(missile.getTheLauncher().getID(), missile.getMissileId(), missile.getDestination(),
 					missile.getDamage(), missile.getFlyTime());
 		}
 	}
@@ -285,7 +284,7 @@ public class Game implements MissileLaunchListener, LauncherDestructListener, Mi
 
 	private void fireDestructMissile(DestructTarget target) {
 		for (GameModelEventsListener g : allListeners) {
-			g.destructMissileInModel(target.getTarget().getMissileId(), target.getDestructor().getId(),
+			g.destructMissileInModel(target.getTarget().getMissileId(), target.getDestructor().getID(),
 					target.getWaitingTime());
 		}
 	}
@@ -293,20 +292,20 @@ public class Game implements MissileLaunchListener, LauncherDestructListener, Mi
 	private void fireMissileLand(Missile missile) {
 		for (GameModelEventsListener g : allListeners) {
 			g.missileResultInModel(missile.getMissileId(), missile.isHitTarget(), missile.isDestructed(),
-					missile.getTheLauncher().isHidden(), missile.getTheLauncher().getId());
+					missile.getTheLauncher().isHidden(), missile.getTheLauncher().getID());
 		}
 	}
 
 	private void fireLauncherDestructResult(LauncherDestructTarget target) {
 		for (GameModelEventsListener g : allListeners) {
 			g.missileLauncherDestructResultInModel(target.getDestructor().getID(), target.getType(),
-					target.getTarget().getId(), target.getTarget().isDestroyed());
+					target.getTarget().getID(), target.getTarget().isDestroyed());
 		}
 	}
 
 	private void fireMissileDestructResult(DestructTarget target) {
 		for (GameModelEventsListener g : allListeners) {
-			g.missileDestructResultInModel(target.getDestructor().getId(), target.getTarget().isDestructed());
+			g.missileDestructResultInModel(target.getDestructor().getID(), target.getTarget().isDestructed());
 		}
 	}
 

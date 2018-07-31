@@ -75,7 +75,7 @@ public class ConfigHandler {
 						missileFlyTime_Node.asInt(),missileLaunchTime_Node.asInt(),missileDamage_Node.asInt(), launcherObject);
 					launcherObject.addMissile(missileObject);
 				}
-			launchers.put(launcherObject.getId(), launcherObject);
+			launchers.put(launcherObject.getID(), launcherObject);
 			theGame.addMissileLauncherFromConfig(launcherObject);
 
 			}

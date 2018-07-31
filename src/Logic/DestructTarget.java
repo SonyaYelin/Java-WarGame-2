@@ -1,7 +1,5 @@
 package Logic;
 
-import java.util.logging.Level;
-
 
 public class DestructTarget extends Thread {
 	private Missile target;
@@ -48,7 +46,7 @@ public class DestructTarget extends Thread {
 				}
 				//GameLogger.log(destructor, Level.INFO, "Desturctor "+ destructor.getId() +" destoryed "+target.getMissileId());
 			}
-			else
+			//else
 				//GameLogger.log(destructor, Level.INFO, "Desturctor "+ destructor.getId() +" missed "+target.getMissileId());
 
 			destructor.notifyAllListenerResult(this);
