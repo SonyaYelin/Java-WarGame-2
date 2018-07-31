@@ -57,7 +57,7 @@ public class VisualApplication extends Application {
 		menu.setAlignment(Pos.TOP_RIGHT);
 		menu.getStyleClass().addAll("vbox","button");
 		
-		new GameController(Game.getInstance() , gamePanel);
+		new GameController(gamePanel);
 		configDialog();
 		primaryStage.show();
 

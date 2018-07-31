@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import Logger.GameLogger;
 
 public class MissileDestructor implements MissileLaunchListener,Runnable {
-
+ 
 	private String id;
 	private Map<String,Integer> missilesToDestruct;
 	private int currentWaitingTime;
@@ -43,11 +43,11 @@ public class MissileDestructor implements MissileLaunchListener,Runnable {
 	public void notifyAllListener(DestructTarget target) {
 		int size = listeners.size();
 		for (int i = 0; i < size; i++)
-			listeners.elementAt(i).onLaunchEvent(target);
+			listeners.elementAt(i).onMissileDestructorLaunchEvent(target);
 	}
 
 	@Override
-	public void onLaunchEvent(Missile launchedMissile) {
+	public void onMissileLaunchEvent(Missile launchedMissile) {
 		if(missilesToDestruct.containsKey(launchedMissile.getMissileId()))
 		{
 			synchronized (this) {
@@ -58,7 +58,7 @@ public class MissileDestructor implements MissileLaunchListener,Runnable {
 		}
 	}
 	@Override
-	public void onLandEvent(Missile landMissile) {
+	public void onMissileLandEvent(Missile landMissile) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -85,6 +85,6 @@ public class MissileDestructor implements MissileLaunchListener,Runnable {
 	public void notifyAllListenerResult(DestructTarget target) {
 		int size = listeners.size();
 		for (int i = 0; i < size; i++)
-			listeners.elementAt(i).onDestructResult(target);
+			listeners.elementAt(i).onMissileDestructResult(target);
 	}	
 }

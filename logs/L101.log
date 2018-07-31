@@ -1,15 +1,15 @@
-2018-07-31T11:58:47.5192522: In Missile Launcher L101 ::run
-2018-07-31T11:58:47.5202524: Missile Launcher L101 has no missiles waiting
-2018-07-31T11:58:49.4683498: After adding missile #M1 there are 1 missiles waiting in L101
-2018-07-31T11:58:49.4692898: Missile #M1 is waiting to launch 
-2018-07-31T11:58:49.4702896: Missile Launcher L101 was notified there is a missile waiting
-2018-07-31T11:58:49.4712963: MissileLauncher L101 is notifying Missile #M1
-2018-07-31T11:58:49.4712963: MissileLauncher L101 waits that missile #M1 will land/be destructed
-2018-07-31T11:58:49.4722936: Missile #M1 started launch to Sderot
-2018-07-31T11:58:49.4832822: Missile #M1 starts flying for 12 seconds
-2018-07-31T11:58:53.486286: Missile #M1 was destructed
-2018-07-31T11:58:53.486286: Missile #M1 missed target Sderot
-2018-07-31T11:58:53.486286: Missile Launcher L101 was announced that Missile #M1 is landed/destructed 
-2018-07-31T11:58:53.4872854: Missile Launcher L101 was Desrructed
-2018-07-31T11:58:53.4872854: After adding missile #M2 there are 1 missiles waiting in L101
-2018-07-31T11:58:53.4872854: Missile #M2 is waiting to launch 
+2018-07-31T15:41:41.2771906: In Missile Launcher L101 ::run
+2018-07-31T15:41:41.3291604: Missile Launcher L101 has no missiles waiting
+2018-07-31T15:41:42.7485196: After adding missile #M1 there are 1 missiles waiting in L101
+2018-07-31T15:41:42.7485196: Missile Launcher L101 was notified there is a missile waiting
+2018-07-31T15:41:42.7495182: MissileLauncher L101 is notifying Missile #M1
+2018-07-31T15:41:42.7495182: Missile #M1 is waiting to launch 
+2018-07-31T15:41:42.7495182: MissileLauncher L101 waits that missile #M1 will land/be destructed
+2018-07-31T15:41:42.750518: Missile #M1 started launch to Sderot
+2018-07-31T15:41:42.877447: Missile #M1 starts flying for 12 seconds
+2018-07-31T15:41:46.880627: Missile #M1 was destructed
+2018-07-31T15:41:46.8816278: Missile #M1 missed target Sderot
+2018-07-31T15:41:46.8816278: Missile Launcher L101 was announced that Missile #M1 is landed/destructed 
+2018-07-31T15:41:46.8876171: Missile Launcher L101 was Desrructed
+2018-07-31T15:41:46.8886237: After adding missile #M2 there are 1 missiles waiting in L101
+2018-07-31T15:41:46.8896159: Missile #M2 is waiting to launch 

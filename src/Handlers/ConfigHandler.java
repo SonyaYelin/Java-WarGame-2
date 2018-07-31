@@ -159,7 +159,7 @@ public class ConfigHandler {
 				}
 				MissileLauncherDestructorObject.setLaunchersToDestruct(targetsD);
 				
-				theGame.addMissileLauncherDestructorFromConfig(MissileLauncherDestructorObject);
+				theGame.addLauncherDestructorFromConfig(MissileLauncherDestructorObject);
 			}
 			theGame.startAllObjects();
 		

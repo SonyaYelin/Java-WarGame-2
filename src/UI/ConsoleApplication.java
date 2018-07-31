@@ -15,7 +15,7 @@ public class ConsoleApplication implements GameUI {
 	
 	public ConsoleApplication() {
 		allListeners = new Vector<GameUIEventsListener>();
-		new GameController(Game.getInstance(), this);
+		new GameController(this);
 	}
 	
 	public static void main(String[] args) {

@@ -46,13 +46,13 @@ public class MissileLauncherDestructor implements Runnable{
 	public void notifyAllListenerLaunch(LauncherDestructTarget target) {
 		int size = listeners.size();
 		for (int i = 0; i < size; i++)
-			listeners.elementAt(i).onLaunchEvent(target);
+			listeners.elementAt(i).onLauncherDestructorLaunchEvent(target);
 	}
 	
 	public void notifyAllListenerResult(LauncherDestructTarget target) {
 		int size = listeners.size();
 		for (int i = 0; i < size; i++)
-			listeners.elementAt(i).onDestructResult(target);
+			listeners.elementAt(i).onLauncherDestructResult(target);
 	}
 	public String getType() {
 		return type;

@@ -23,7 +23,6 @@ public class MissileLauncher implements Runnable {
 		this.isHidden = isHidden;
 		this.missilesToLaunch = new Vector<Missile>();
 		this.listeners = new Vector<MissileLaunchListener>();
-		GameLogger.addFileHandler(this, id);
 	}
 
 	public MissileLauncher(String id) {
@@ -59,12 +58,12 @@ public class MissileLauncher implements Runnable {
 	public void notifyAllLaunchListener(Missile missileFly) {
 		int size = listeners.size();
 		for (int i = 0; i < size; i++)
-			listeners.elementAt(i).onLaunchEvent(missileFly);
+			listeners.elementAt(i).onMissileLaunchEvent(missileFly);
 	}
 	public void notifyAllLandListener(Missile missileLnd) {
 		int size = listeners.size();
 		for (int i = 0; i < size; i++)
-			listeners.elementAt(i).onLandEvent(missileLnd);
+			listeners.elementAt(i).onMissileLandEvent(missileLnd);
 	}
 
 
@@ -94,7 +93,7 @@ public class MissileLauncher implements Runnable {
 		if (isHidden)
 			wasHidden = true;
 		if (firstMissile != null) {
-			GameLogger.log(this, Level.INFO, "MissileLauncher " + id + " is notifying Missile #" + firstMissile.getMissileId());
+			//GameLogger.log(this, Level.INFO, "MissileLauncher " + id + " is notifying Missile #" + firstMissile.getMissileId());
 			synchronized (firstMissile) {
 				firstMissile.notifyAll();
 				launchedMissileCounter++;
@@ -104,14 +103,14 @@ public class MissileLauncher implements Runnable {
 
 		synchronized (this) {
 			try {
-				GameLogger.log(this, Level.INFO,"MissileLauncher " + id + " waits that missile #" + firstMissile.getMissileId()
-				+ " will land/be destructed");
+				//GameLogger.log(this, Level.INFO,"MissileLauncher " + id + " waits that missile #" + firstMissile.getMissileId()
+				//+ " will land/be destructed");
 
 				notifyAllLaunchListener(firstMissile);
 
 				wait(); // wait till the missile finishes
-				GameLogger.log(this, Level.INFO,"Missile Launcher " + id + " was announced that Missile #"
-						+ firstMissile.getMissileId() + " is landed/destructed ");
+//				GameLogger.log(this, Level.INFO,"Missile Launcher " + id + " was announced that Missile #"
+//						+ firstMissile.getMissileId() + " is landed/destructed ");
 				if (wasHidden)
 					isHidden = true;
 				notifyAllLandListener(firstMissile);

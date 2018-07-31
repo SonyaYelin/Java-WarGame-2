@@ -1,7 +1,5 @@
 package MVC;
 
-import DB.SqlDB;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -11,22 +9,24 @@ import UI.GameUI;
 
 public class GameController implements GameModelEventsListener, GameUIEventsListener {
 
+	private static final String DB_CONFIG = "db-spring-config.xml";
+	private static final String DATA_BASE = "dataBase";
+	
 	private Game 				theGame;
 	private GameUI 				theGameUI;
 	
-	private ApplicationContext	theContext;
 	private IDB 				db;
 
 	
-	public GameController(Game theGame, GameUI theGameUI) {
-		this.theGame = theGame;
+	public GameController(GameUI theGameUI) {
+		this.theGame = Game.getInstance();
 		this.theGameUI = theGameUI;
 
 		theGame.registerListener(this);
 		theGameUI.registerListener(this);
 		
-		theContext = new ClassPathXmlApplicationContext("spring.xml");
-		db = (IDB) theContext.getBean("dataBase");
+		ApplicationContext	theContext = new ClassPathXmlApplicationContext(DB_CONFIG);
+		db = (IDB) theContext.getBean(DATA_BASE);
 	}
 	
 	@Override
@@ -54,8 +54,8 @@ public class GameController implements GameModelEventsListener, GameUIEventsList
 	}
 
 	@Override
-	public void addMissileLauncherDestructorFromUI(String type) {
-		theGame.addMissileLauncherDestructor(type);
+	public void addMissileLauncherDestructorFromUI(String type) { 
+		theGame.addLauncherDestructor(type);
 
 	} 
 

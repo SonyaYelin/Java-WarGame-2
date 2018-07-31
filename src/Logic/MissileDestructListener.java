@@ -1,7 +1,7 @@
 package Logic;
 
 public interface MissileDestructListener {
-	void onLaunchEvent(DestructTarget target);
-	void onDestructResult(DestructTarget target);
+	void onMissileDestructorLaunchEvent(DestructTarget target);
+	void onMissileDestructResult(DestructTarget target);
 
 }

@@ -1,6 +1,6 @@
 package Logic;
 
 public interface LauncherDestructListener {
-	void onLaunchEvent(LauncherDestructTarget target);
-	void onDestructResult(LauncherDestructTarget target);
+	void onLauncherDestructorLaunchEvent(LauncherDestructTarget target);
+	void onLauncherDestructResult(LauncherDestructTarget target);
 }
