@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Vector;
 import java.util.logging.Level;
 
-import Logger.GameLogger;
 
 public class MissileDestructor implements MissileLaunchListener,Runnable {
  
@@ -19,8 +18,6 @@ public class MissileDestructor implements MissileLaunchListener,Runnable {
 		this.id = id;
 		this.missilesToDestruct = new HashMap<String,Integer>();
 		this.listeners = new Vector<MissileDestructListener>();
-
-		GameLogger.addFileHandler(this, id);
 	}
 
 	
@@ -65,7 +62,7 @@ public class MissileDestructor implements MissileLaunchListener,Runnable {
 	
 	@Override
 	public void run() {
-		GameLogger.log(this, Level.INFO, "In Missile Desturctor "+ id +" ::run");
+		//GameLogger.log(this, Level.INFO, "In Missile Desturctor "+ id +" ::run");
 
 		while(true){
 			try {

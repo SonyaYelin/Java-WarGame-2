@@ -3,7 +3,6 @@ package Logic;
 import java.util.Random;
 import java.util.logging.Level;
 
-import Logger.GameLogger;
 
 public class Missile extends Thread implements Comparable<Missile> {
 
@@ -33,30 +32,30 @@ public class Missile extends Thread implements Comparable<Missile> {
 		synchronized (this) {
 			Thread.sleep(launchTime * 1000);
 			theLauncher.addWaitingMissile(this);
-			GameLogger.log(theLauncher, Level.INFO,"Missile #" + getMissileId() + " is waiting to launch ");
+			//GameLogger.log(theLauncher, Level.INFO,"Missile #" + getMissileId() + " is waiting to launch ");
 			// gets notified by launcher
 			wait();
-			GameLogger.log(theLauncher, Level.INFO,"Missile #" + getMissileId() + " started launch to "+destination);
+			//GameLogger.log(theLauncher, Level.INFO,"Missile #" + getMissileId() + " started launch to "+destination);
 		}
 
 	}
 
 	public synchronized void fly() throws InterruptedException {
 		synchronized (theLauncher) {
-			GameLogger.log(theLauncher, Level.INFO,"Missile #" + getMissileId() + " starts flying for " + flyTime + " seconds");
+			//GameLogger.log(theLauncher, Level.INFO,"Missile #" + getMissileId() + " starts flying for " + flyTime + " seconds");
 			synchronized (this) {
 				wait(flyTime * 1000);// if missile was destroyed MissileDestructor notify
 				if(Destructed)	{
 					willHit = false;
-					GameLogger.log(theLauncher, Level.INFO,"Missile #" + getMissileId() + " was destructed");
+					//GameLogger.log(theLauncher, Level.INFO,"Missile #" + getMissileId() + " was destructed");
 				}
 			}
 			if(willHit){
 				hitTarget=true;
-				GameLogger.log(theLauncher, Level.INFO,"Missile #" + getMissileId() + " hit target "+ destination +" damage: "+ damage);
+				//GameLogger.log(theLauncher, Level.INFO,"Missile #" + getMissileId() + " hit target "+ destination +" damage: "+ damage);
 			}
 			else
-				GameLogger.log(theLauncher, Level.INFO,"Missile #" + getMissileId() + " missed target "+ destination );
+				//GameLogger.log(theLauncher, Level.INFO,"Missile #" + getMissileId() + " missed target "+ destination );
 
 			theLauncher.notify();
 			

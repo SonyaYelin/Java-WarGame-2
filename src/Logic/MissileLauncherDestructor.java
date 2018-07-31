@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Vector;
 import java.util.logging.Level;
 
-import Logger.GameLogger;
 
 public class MissileLauncherDestructor implements Runnable{
 
@@ -22,9 +21,6 @@ public class MissileLauncherDestructor implements Runnable{
 		this.id = ""+iDGen++;
 		this.type = type;
 		this.listeners = new Vector<LauncherDestructListener>();
-		GameLogger.addFileHandler(this, type);
-
-
 	}
 	
 	
@@ -60,7 +56,7 @@ public class MissileLauncherDestructor implements Runnable{
 	
 	@Override
 	public void run() {
-		GameLogger.log(this, Level.INFO, "In Missile Launcher Destructor " + type + " ::run");
+		//GameLogger.log(this, Level.INFO, "In Missile Launcher Destructor " + type + " ::run");
 		while(true){
 			if(!launchersToDestruct.isEmpty()){
 				for(Iterator<Map.Entry<Integer, MissileLauncher>> it = launchersToDestruct.entrySet().iterator(); it.hasNext(); ) {
