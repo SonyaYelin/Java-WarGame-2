@@ -23,5 +23,8 @@
 	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/jackson-core-2.2.3.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/content.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/aspectj-1.9.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/mysql-connector-java-5.1.46/mysql-connector-java-5.1.46.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/mysql-connector-java-5.1.46/mysql-connector-java-5.1.46-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/mongo-java-driver-3.8.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

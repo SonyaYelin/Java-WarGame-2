@@ -14,7 +14,6 @@ public class LogCalls {
     public void logCalls(JoinPoint theJoinPoint) {
     	String methodName = theJoinPoint.getSignature().getName();
     	System.out.println(methodName);
-     
     }
 }
 

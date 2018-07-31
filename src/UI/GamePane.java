@@ -126,7 +126,7 @@ public class GamePane extends AnchorPane implements GameUI {
 		}
 	}
 
-	@Override
+	@Override 
 	public void showAddMissileLauncherDestructor(String type) {
 		if (type.contains("plane")) {
 			MissileLauncherDestructorView mLd = new MissileLauncherDestructorView(type, "plane");
@@ -265,6 +265,8 @@ public class GamePane extends AnchorPane implements GameUI {
 
 	@Override
 	public void exit() {
+		for (GameUIEventsListener l : allListeners)
+			l.exitFromUI();
 		CloseApplicationUtil.closeApplication(theApplication);
 
 	}

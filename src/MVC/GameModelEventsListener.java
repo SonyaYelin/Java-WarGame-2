@@ -4,13 +4,13 @@ public interface GameModelEventsListener {
 
 	void addMissileLauncherInModel(String id,boolean isHidden);
 
-	void addMissileLauncherDestructorInModel(String id);
+	void addMissileLauncherDestructorInModel(String id, String type);
 
 	void addMissileDestructorInModel(String id);
 
 	void launchMissileInModel(String missileLauncherId, String missileId, String destination, int damage,int flyTime);
 
-	void destructMissileLauncherInModel(String type,String missileLauncherId);
+	void destructMissileLauncherInModel(String id, String type,String missileLauncherId);
 
 	void destructMissileInModel(String missileIdToDestruct, String missileDestructorId, int waitingTime);
 	
@@ -22,13 +22,17 @@ public interface GameModelEventsListener {
 
 	void notifyFailedAddMissileDestructorInModel(String message);
 
-	void missileLauncherDestructResultInModel(String type , String missileLauncherId ,boolean isDestructed);
+	void missileDestructResultInModel(String destructorID ,boolean isDestructed);
+
+	void missileLauncherDestructResultInModel(String id, String type , String missileLauncherId ,boolean isDestructed);
 
 	void notifyFailedLaunchMissileInModel(String message);
 
 	void notifyFailedDestructMissileInModel(String message);
 
 	void notifyFailedDestructMissileLaucherInModel(String message);
+
+	//void exitInModel();
 
 
 

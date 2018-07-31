@@ -81,8 +81,10 @@ public class MissileDestructor implements MissileLaunchListener,Runnable {
 		}
 
 	}
-
-
-
 	
+	public void notifyAllListenerResult(DestructTarget target) {
+		int size = listeners.size();
+		for (int i = 0; i < size; i++)
+			listeners.elementAt(i).onDestructResult(target);
+	}	
 }

@@ -1,5 +1,3 @@
-
-
 package Logic;
 
 import java.util.HashMap;
@@ -10,6 +8,9 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import DB.MongoDB;
+import DB.SqlDB;
+import DB.IDB;
 import Logger.GameLogger;
 import Logger.ToLog;
 import MVC.GameModelEventsListener;
@@ -133,7 +134,7 @@ public class Game implements MissileLaunchListener,LauncherDestructListener,Miss
 				if(missileLauncherDestructors.size()<MAX_NUM_OF_MISSILE_LAUNCHER_DESTRUCTOR && !missileLauncherDestructors.containsKey(missileLauncherDestructor.getType())){
 				missileLauncherDestructors.put(missileLauncherDestructor.getType(), missileLauncherDestructor);
 				missileLauncherDestructor.registerListener(theGame);
-				fireAddMissileLauncherDestructor(missileLauncherDestructor.getType());
+				fireAddMissileLauncherDestructor(missileLauncherDestructor.getID(), missileLauncherDestructor.getType());
 				}
 				else
 					fireNotificationFailedAddMissileLauncherDestructor("Too Many Missile Launcher Destructors/already exist");
@@ -148,9 +149,9 @@ public class Game implements MissileLaunchListener,LauncherDestructListener,Miss
 				MissileLauncherDestructor newmld = new MissileLauncherDestructor(type);
 				newmld.registerListener(theGame);
 				missileLauncherDestructors.put(type, newmld);
-				Thread newmldT = new Thread(newmld);
+				Thread newmldT = new Thread(newmld); 
 				newmldT.start();
-				fireAddMissileLauncherDestructor(type);
+				fireAddMissileLauncherDestructor(newmld.getID(), type);
 				}
 				else
 					fireNotificationFailedAddMissileLauncherDestructor("Too Many Missile Launcher Destructors/already exist");
@@ -224,9 +225,9 @@ public class Game implements MissileLaunchListener,LauncherDestructListener,Miss
 
 		}
 
-		private void fireAddMissileLauncherDestructor(String id) {
+		private void fireAddMissileLauncherDestructor(String id, String type) {
 			for (GameModelEventsListener g : allListeners) {
-				g.addMissileLauncherDestructorInModel(id);
+				g.addMissileLauncherDestructorInModel(id, type);
 			}
 		}
 
@@ -273,7 +274,7 @@ public class Game implements MissileLaunchListener,LauncherDestructListener,Miss
 
 		private void fireDestructMissileLauncher(LauncherDestructTarget target) {
 			for (GameModelEventsListener g : allListeners) {
-				g.destructMissileLauncherInModel(target.getType(),target.getTargetID());
+				g.destructMissileLauncherInModel(target.getDestructor().getID(), target.getType(),target.getTargetID());
 			}
 		}
 		private void fireDestructMissile(DestructTarget target) {
@@ -289,7 +290,13 @@ public class Game implements MissileLaunchListener,LauncherDestructListener,Miss
 		
 		private void fireLauncherDestructResult(LauncherDestructTarget target) {
 			for (GameModelEventsListener g : allListeners) {
-				g.missileLauncherDestructResultInModel(target.getType(),target.getTarget().getId(),target.getTarget().isDestroyed());
+				g.missileLauncherDestructResultInModel(target.getDestructor().getID(), target.getType(),target.getTarget().getId(),target.getTarget().isDestroyed());
+			}
+		}
+		
+		private void fireMissileDestructResult(DestructTarget target) {
+			for (GameModelEventsListener g : allListeners) {
+				g.missileDestructResultInModel(target.getDestructor().getId() ,target.getTarget().isDestructed());
 			}
 		}
 		
@@ -314,12 +321,36 @@ public class Game implements MissileLaunchListener,LauncherDestructListener,Miss
 					missileLauncherDestroy++;
 				// how many missile launch
 				launchMissileCounter += missileLauncher.getLaunchedMissileCounter();
-
 			}
 			return printTotalSumarry(hitMissile, launchMissileCounter, totalDamage, missileLauncherDestroy);
-
 		}
 
+		private int[] getStatistics() {
+			int missileHits = 0;
+			int launchedMissiles = 0;
+			int totalDamage = 0;
+			int destructedLaunchers = 0;
+			int destructedMissiles = 0;
+
+			for (MissileLauncher missileLauncher : missileLaunchers.values()) {
+				Vector<Missile> missiles = missileLauncher.getMissilesToLaunch();
+				for (Missile m : missiles) {
+					if (m.isHitTarget()) {
+						missileHits++;
+						totalDamage += m.getDamage();
+					}
+				}
+				if (missileLauncher.isDestroyed())
+					destructedLaunchers++;
+				// how many missile launch
+				launchedMissiles += missileLauncher.getLaunchedMissileCounter();
+				destructedMissiles = launchedMissiles - missileHits;
+			}
+			int[] ret = {missileHits, launchedMissiles, totalDamage, destructedLaunchers, destructedMissiles};
+			return ret;
+		}
+		
+		
 		private String printTotalSumarry(int hitMissile, int launchMissileCounter, int totalDamage,
 				int missileLauncherDestroy) {
 			StringBuilder builder = new StringBuilder();
@@ -359,6 +390,11 @@ public class Game implements MissileLaunchListener,LauncherDestructListener,Miss
 		@Override
 		public void onDestructResult(LauncherDestructTarget target) {
 			fireLauncherDestructResult(target);
+		}
+		
+		@Override
+		public void onDestructResult(DestructTarget target) {
+			fireMissileDestructResult(target);
 		}
 		
 		public void test() {

@@ -27,6 +27,10 @@ public class LauncherDestructTarget extends Thread {
 		return target;
 	}
 	
+	public MissileLauncherDestructor getDestructor() {
+		return theDestructor;
+	}
+	
 	@Override
 	public void run() {
 		try {

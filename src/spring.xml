@@ -7,6 +7,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
 http://www.springframework.org/schema/aop 
 http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
 
+    <bean id="dataBase" class="DB.SqlDB"/>
 
     <aop:aspectj-autoproxy>
         <aop:include name="Logger.LogCalls"/>

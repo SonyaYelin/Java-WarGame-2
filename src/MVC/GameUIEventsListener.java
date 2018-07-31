@@ -16,4 +16,5 @@ public interface GameUIEventsListener {
 	
 	void viewGameStatusFromUI();
 
+	void exitFromUI();
 }

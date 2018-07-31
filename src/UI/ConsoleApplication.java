@@ -155,6 +155,8 @@ public class ConsoleApplication implements GameUI {
 
 	@Override
 	public void exit() {
+		for (GameUIEventsListener l : allListeners)
+			l.exitFromUI();
 		System.exit(1);
 	}
 

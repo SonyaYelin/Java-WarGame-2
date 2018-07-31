@@ -1,10 +1,10 @@
-2018-07-22T11:43:06.2631456: In Missile Desturctor D201 ::run
-2018-07-22T11:43:08.2154903: Desturctor D201 Launcher waits 4 for M1
-2018-07-22T11:43:10.2064454: Desturctor D201 Launcher waits 8 for M3
-2018-07-22T11:43:12.2184411: Desturctor D201 finish waiting to M1
-2018-07-22T11:43:12.2184411: Desturctor D201 destoryed M1
-2018-07-22T11:43:15.2011237: Desturctor D201 Launcher waits 2 for M4
-2018-07-22T11:43:17.2033535: Desturctor D201 finish waiting to M4
-2018-07-22T11:43:17.2033535: Desturctor D201 destoryed M4
-2018-07-22T11:43:18.2100817: Desturctor D201 finish waiting to M3
-2018-07-22T11:43:18.2100817: Desturctor D201 missed M3
+2018-07-31T11:58:47.5182527: In Missile Desturctor D201 ::run
+2018-07-31T11:58:49.4842872: Desturctor D201 Launcher waits 4 for M1
+2018-07-31T11:58:51.5058392: Desturctor D201 Launcher waits 8 for M3
+2018-07-31T11:58:53.4852892: Desturctor D201 finish waiting to M1
+2018-07-31T11:58:53.486286: Desturctor D201 destoryed M1
+2018-07-31T11:58:56.4998811: Desturctor D201 Launcher waits 2 for M4
+2018-07-31T11:58:58.5000424: Desturctor D201 finish waiting to M4
+2018-07-31T11:58:58.5010388: Desturctor D201 destoryed M4
+2018-07-31T11:58:59.5061702: Desturctor D201 finish waiting to M3
+2018-07-31T11:58:59.5071466: Desturctor D201 missed M3

@@ -10,12 +10,16 @@ import Logger.GameLogger;
 
 public class MissileLauncherDestructor implements Runnable{
 
+	private static int iDGen;
+	
+	private String id;
 	private String type;
 	private Map<Integer,MissileLauncher> launchersToDestruct = new HashMap<>();
 	private Vector<LauncherDestructListener> listeners;
 
 	public MissileLauncherDestructor(String type) {
 		super();
+		this.id = ""+iDGen++;
 		this.type = type;
 		this.listeners = new Vector<LauncherDestructListener>();
 		GameLogger.addFileHandler(this, type);
@@ -79,6 +83,11 @@ public class MissileLauncherDestructor implements Runnable{
 			}
 			
 		}
+
+
+	public String getID() {
+		return id;
+	}
 		
 	
  

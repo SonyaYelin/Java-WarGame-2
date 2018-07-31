@@ -45,12 +45,14 @@ public class DestructTarget extends Thread {
 				synchronized (target) {
 					target.setDestructed(true);
 					target.notify();
-
+					target.setDestructed(true);
 				}
 				GameLogger.log(destructor, Level.INFO, "Desturctor "+ destructor.getId() +" destoryed "+target.getMissileId());
 			}
 			else
 				GameLogger.log(destructor, Level.INFO, "Desturctor "+ destructor.getId() +" missed "+target.getMissileId());
+
+			destructor.notifyAllListenerResult(this);
 
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
