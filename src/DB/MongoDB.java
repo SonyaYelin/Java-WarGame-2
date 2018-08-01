@@ -7,6 +7,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.UpdateOptions;
 import com.mongodb.client.model.Updates;
 
 public class MongoDB implements IDB{
@@ -28,32 +29,33 @@ public class MongoDB implements IDB{
 	@Override
 	public void addMissileLuauncher(String id, boolean isHidden) {
 		MongoCollection<Document> collection = database.getCollection("missile_launchers");
-
-		Document doc = new Document("id", id)
-	            		.append("is_hidden", isHidden)
-	            		.append("is_destructed", false)
-						.append("launched_missiles", 0)
-						.append("missile_hits", 0);
-
-		collection.insertOne(doc);
+		
+		collection.updateOne(Filters.eq("id", id),  Updates.combine( 
+								Updates.set("id", id), 
+								Updates.set("is_hidden", isHidden),
+								Updates.set("is_destructed", false),
+								Updates.set("launched_missiles", 0),
+								Updates.set("missile_hits", 0)),
+				new UpdateOptions().upsert(true).bypassDocumentValidation(true));
 	}
 
 	@Override
 	public void addMissileDestructor(String id) {
 		MongoCollection<Document> collection = database.getCollection("missile_destructors");
-
-		Document doc = new Document("id", id).append("destructed_missiles", 0);
-	
-		collection.insertOne(doc);
+		
+		collection.updateOne(Filters.eq("id", id),  Updates.combine( Updates.set("id", id), Updates.set("destructed_missiles", 0) ),
+                new UpdateOptions().upsert(true).bypassDocumentValidation(true));
 	}
 
 	@Override
 	public void addLauncherDestructor(String id, String type) {
 		MongoCollection<Document> collection = database.getCollection("launcher_destructors");
-
-		Document doc = new Document("id", id).append("type", type).append("destructed_launchers", 0);
 	
-		collection.insertOne(doc);
+		collection.updateOne(Filters.eq("id", id),  Updates.combine( 
+								Updates.set("id", id), 
+								Updates.set("type", type),
+								Updates.set("destructed_launchers", 0)),
+				new UpdateOptions().upsert(true).bypassDocumentValidation(true));
 	}
 
 	@Override

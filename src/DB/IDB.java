@@ -2,6 +2,7 @@ package DB;
 
 public interface IDB {
 
+	public static final String DB_NAME = "WAR";
 	public static final String MISSILE_LAUNCHERS = "missile_launchers";
 	public static final String LAUNCHER_DESTRUCTORS = "launcher_destructors";
 	public static final String MISSILE_DESTRUCTORS = "missile_destructors";
