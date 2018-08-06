@@ -36,15 +36,15 @@ public class Game implements MissileLaunchListener, LauncherDestructListener, Mi
 		
 	}
 
-	@ToLog
 	public static Game getInstance() {
 		if (theGame == null) {
 			// synchronized block to remove overhead
 			synchronized (Game.class) {
-				if (theGame == null) {
-					ApplicationContext theContext = new ClassPathXmlApplicationContext(LOGS_CONFIG);
-					theGame = (Game) theContext.getBean(GAME);
-				}
+//				if (theGame == null) {
+//					ApplicationContext theContext = new ClassPathXmlApplicationContext(LOGS_CONFIG);
+//					theGame = (Game) theContext.getBean(GAME);
+//				}
+				theGame = new Game();
 			}
 		}
 		return theGame;
@@ -58,7 +58,7 @@ public class Game implements MissileLaunchListener, LauncherDestructListener, Mi
 		try {
 			if (missileLaunchers.size() < MAX_NUM_OF_MISSILE_LAUNCHER
 					&& !missileLaunchers.containsKey(missileLauncher.getID())) {
-				addMissileLauncher(missileLauncher);
+				this.addMissileLauncher(missileLauncher);
 			} else
 				fireNotificationFailedAddMissileLauncher("Too Many Missile Launchers / already exist");
 		} catch (Exception e) {
@@ -81,7 +81,7 @@ public class Game implements MissileLaunchListener, LauncherDestructListener, Mi
 	}
 
 	@ToLog
-	public void addMissileLauncher(MissileLauncher missileLauncher) {
+	private void addMissileLauncher(MissileLauncher missileLauncher) {
 		try {
 			missileLaunchers.put(missileLauncher.getID(), missileLauncher);
 			missileLauncher.registerListener(theGame);
@@ -377,6 +377,11 @@ public class Game implements MissileLaunchListener, LauncherDestructListener, Mi
 	@ToLog
 	public void onMissileDestructResult(DestructTarget target) {
 		fireMissileDestructResult(target);
+	}
+	
+	@ToLog
+	public void onExit() {
+		
 	}
 
 }

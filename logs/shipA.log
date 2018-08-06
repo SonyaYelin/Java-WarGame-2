@@ -1,7 +1,0 @@
-2018-07-31T17:07:03.066515: In Missile Launcher Destructor shipA ::run
-2018-07-31T17:07:03.0905004: missile-destructor #1 just started destructing launcher #L102
-2018-07-31T17:07:03.0914998: missile-destructor #1 just started destructing launcher #L102
-2018-07-31T17:07:11.0697288: Missile Launcher Desturctor shipA finish waiting to L102
-2018-07-31T17:07:11.0697288: Missile Launcher Desturctor shipA missed L102
-2018-07-31T17:07:15.2967387: Missile Launcher Desturctor shipA finish waiting to L102
-2018-07-31T17:07:15.2967387: Missile Launcher Desturctor shipA missed L102
