@@ -2,14 +2,22 @@ package Logger;
 
 import java.io.IOException;
 import java.util.logging.FileHandler;
+import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import Logic.Game;
 
 public class GameLogger {
 
 	private static Logger	logger = Logger.getLogger("war");
     private static String	LOG_FILES_PATH = "logs/";
     
+    static {
+		removeConsoleHandler();
+		Game game = Game.getInstance();
+		addFileHandler(game, game.getClass().getSimpleName());
+	}
     
 	public static void removeConsoleHandler() {
 		logger.setUseParentHandlers(false);
@@ -31,4 +39,8 @@ public class GameLogger {
         logger.log(level, message, filter);
     }
 
+    public static void close() {
+    	for(Handler h:logger.getHandlers())
+    		h.close();  
+    }
 }

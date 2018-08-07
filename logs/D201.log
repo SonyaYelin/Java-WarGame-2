@@ -1,16 +1,6 @@
-2018-07-31T17:07:03.0255385: In Missile Desturctor D201 ::run
-2018-07-31T17:07:04.6695507: Desturctor D201 Launcher waits 4 for M1
-2018-07-31T17:07:04.6725477: missile-destructor #D201 just started destructing missile #M1
-2018-07-31T17:07:06.8175566: missile-destructor #D201 just started destructing missile #M3
-2018-07-31T17:07:06.8575312: Desturctor D201 Launcher waits 8 for M3
-2018-07-31T17:07:08.6714914: Desturctor D201 finish waiting to M1
-2018-07-31T17:07:08.6714914: Desturctor D201 destoryed M1
-2018-07-31T17:07:08.6784887: missile-destructor #D201 finished destructing missile #M1is destructed: true
-2018-07-31T17:07:11.8125531: missile-destructor #D201 just started destructing missile #M4
-2018-07-31T17:07:11.8135499: Desturctor D201 Launcher waits 2 for M4
-2018-07-31T17:07:13.8136847: Desturctor D201 finish waiting to M4
-2018-07-31T17:07:13.8146914: Desturctor D201 destoryed M4
-2018-07-31T17:07:13.8236875: missile-destructor #D201 finished destructing missile #M4is destructed: true
-2018-07-31T17:07:14.8578224: Desturctor D201 finish waiting to M3
-2018-07-31T17:07:14.8578224: Desturctor D201 missed M3
-2018-07-31T17:07:14.858791: missile-destructor #D201 finished destructing missile #M3is destructed: false
+2018-08-06T00:31:38.1239082: missile-destructor #D201 just started destructing missile #M1
+2018-08-06T00:31:40.2399872: missile-destructor #D201 just started destructing missile #M3
+2018-08-06T00:31:42.1300669: missile-destructor #D201 finished destructing missile #M1is destructed: true
+2018-08-06T00:31:45.2393876: missile-destructor #D201 just started destructing missile #M4
+2018-08-06T00:31:47.2472479: missile-destructor #D201 finished destructing missile #M4is destructed: true
+2018-08-06T00:31:48.2406334: missile-destructor #D201 finished destructing missile #M3is destructed: false

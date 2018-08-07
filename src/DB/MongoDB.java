@@ -14,12 +14,15 @@ import com.mongodb.client.model.Updates;
 public class MongoDB implements IDB{
 
 	
-	private static MongoClient 		mongoClient;
-	private static MongoDatabase	database;
+	private static MongoClient 	mongoClient;
+	private static MongoDatabase database;
+	
+	private static final String LOCAL_HOST = "localhost";
+
 	
 	static {
-		mongoClient = new MongoClient("localhost", 27017);
-		database = mongoClient.getDatabase("war");
+		mongoClient = new MongoClient(LOCAL_HOST, 27017);
+		database = mongoClient.getDatabase(DB_NAME);
 	}
 
 	@Override
@@ -29,94 +32,76 @@ public class MongoDB implements IDB{
 
 	@Override
 	public void addMissileLuauncher(String id, boolean isHidden) {
-		MongoCollection<Document> collection = database.getCollection("missile_launchers");
+		MongoCollection<Document> collection = database.getCollection(MISSILE_LAUNCHERS);
 		
-		collection.updateOne(Filters.eq("id", id),  Updates.combine( 
-								Updates.set("id", id), 
-								Updates.set("is_hidden", isHidden),
-								Updates.set("is_destructed", false),
-								Updates.set("launched_missiles", 0),
-								Updates.set("missile_hits", 0)),
+		collection.updateOne(Filters.eq(ID, id),  Updates.combine( 
+								Updates.set(ID, id), 
+								Updates.set(IS_HIDDEN, isHidden),
+								Updates.set(IS_DESTRUCTED, false),
+								Updates.set(LAUNCHED_MISSILES, 0),
+								Updates.set(MISSILE_HITS, 0)),
 				new UpdateOptions().upsert(true).bypassDocumentValidation(true));
 	}
 
 	@Override
 	public void addMissileDestructor(String id) {
-		MongoCollection<Document> collection = database.getCollection("missile_destructors");
+		MongoCollection<Document> collection = database.getCollection(MISSILE_DESTRUCTORS);
 		
-		collection.updateOne(Filters.eq("id", id),  Updates.combine( Updates.set("id", id), Updates.set("destructed_missiles", 0) ),
+		collection.updateOne(Filters.eq(ID, id),  Updates.combine( Updates.set(ID, id), Updates.set(DESTRUCTED_MISSILES, 0) ),
                 new UpdateOptions().upsert(true).bypassDocumentValidation(true));
 	}
 
 	@Override
 	public void addLauncherDestructor(String id, String type) {
-		MongoCollection<Document> collection = database.getCollection("launcher_destructors");
+		MongoCollection<Document> collection = database.getCollection(LAUNCHER_DESTRUCTORS);
 	
-		collection.updateOne(Filters.eq("id", id),  Updates.combine( 
-								Updates.set("id", id), 
-								Updates.set("type", type),
-								Updates.set("destructed_launchers", 0)),
+		collection.updateOne(Filters.eq(ID, id),  Updates.combine( 
+								Updates.set(ID, id), 
+								Updates.set(TYPE, type),
+								Updates.set(DESTRUCTED_LAUNCHERS, 0)),
 				new UpdateOptions().upsert(true).bypassDocumentValidation(true));
 	}
 
 	@Override
 	public void addMissileLaunch(String id) {
-		MongoCollection<Document> collection = database.getCollection("missile_launchers");
-		Document d = collection.find(Filters.eq("id", id)).first();
+		MongoCollection<Document> collection = database.getCollection(MISSILE_LAUNCHERS);
+		Document d = collection.find(Filters.eq(ID, id)).first();
 		
-		int launchedMissiles = d.getInteger("launched_missiles", 0) + 1;
-		collection.updateMany(Filters.eq("id", id), Updates.set("launched_missiles", launchedMissiles));    
+		int launchedMissiles = d.getInteger(LAUNCHED_MISSILES, 0) + 1;
+		collection.updateMany(Filters.eq(ID, id), Updates.set(LAUNCHED_MISSILES, launchedMissiles));    
 	}
 
 	@Override
 	public void addMissileHit(String id) {
-		MongoCollection<Document> collection = database.getCollection("missile_launchers");
-		Document d = collection.find(Filters.eq("id", id)).first();
+		MongoCollection<Document> collection = database.getCollection(MISSILE_LAUNCHERS);
+		Document d = collection.find(Filters.eq(ID, id)).first();
 		
-		int missileHits = d.getInteger("missile_hits", 0) + 1;
-		collection.updateMany(Filters.eq("id", id), 
-								Updates.set("missile_hits", missileHits));    
+		int missileHits = d.getInteger(MISSILE_HITS, 0) + 1;
+		collection.updateMany(Filters.eq(ID, id), 
+								Updates.set(MISSILE_HITS, missileHits));    
 	}
 
 	@Override
 	public void addMissileDestruct(String id) {
-		MongoCollection<Document> collection = database.getCollection("missile_destructors");
-		Document d = collection.find(Filters.eq("id", id)).first();
+		MongoCollection<Document> collection = database.getCollection(MISSILE_DESTRUCTORS);
+		Document d = collection.find(Filters.eq(ID, id)).first();
 		
-		int destructedMissiles = d.getInteger("destructed_missiles", 0) + 1;
-		collection.updateMany(Filters.eq("id", id), 
-								Updates.set("destructed_missiles", destructedMissiles));    
+		int destructedMissiles = d.getInteger(DESTRUCTED_MISSILES, 0) + 1;
+		collection.updateMany(Filters.eq(ID , id), 
+								Updates.set(DESTRUCTED_MISSILES, destructedMissiles));    
 	}
 
 	@Override
 	public void addLauncherDestruct(String destructorID, String launcherID) {
-		MongoCollection<Document> collection = database.getCollection("launcher_destructors");
-		Document d = collection.find(Filters.eq("id", destructorID)).first();
+		MongoCollection<Document> collection = database.getCollection(LAUNCHER_DESTRUCTORS);
+		Document d = collection.find(Filters.eq(ID, destructorID)).first();
 		
-		int destructedLaunchers = d.getInteger("destructed_launchers", 0) + 1;
-		collection.updateMany(Filters.eq("id", destructorID), 
-								Updates.set("destructed_launchers", destructedLaunchers));    
+		int destructedLaunchers = d.getInteger(DESTRUCTED_LAUNCHERS, 0) + 1;
+		collection.updateMany(Filters.eq(ID, destructorID), 
+								Updates.set(DESTRUCTED_LAUNCHERS, destructedLaunchers));    
 		
-		collection = database.getCollection("missile_launchers");
-		collection.updateMany(Filters.eq("id", launcherID), 
-								Updates.set("is_destructed", true));    
+		collection = database.getCollection(MISSILE_LAUNCHERS);
+		collection.updateMany(Filters.eq(ID, launcherID), 
+								Updates.set(IS_DESTRUCTED, true));    
 	}
-
-	
-//	public void getFromDB(String id, String from) {
-//		MongoCollection<Document> collection = 	database.getCollection(from);
-//
-//		FindIterable<Document> ret = collection.find(Filters.eq("id", id));
-//	}
-
-//	@Override
-//	public List<String> getAllTablesNames() {
-//		return null; 
-//	}
-//
-//	@Override
-//	public Vector<String[]> getQueryData(String tableName, Vector<String> headers) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 }

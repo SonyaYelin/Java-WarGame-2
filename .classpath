@@ -6,34 +6,57 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/com.fasterxml.jackson.databind.jar"/>
-	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/gson-2.6.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/jackson-annotations-2.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/jackson-core-2.2.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/aspect/aopalliance-1.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/aspect/aspectjrt-1.6.9.jar"/>
-	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/aspect/aspectjweaver-1.6.9.jar"/>
-	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/spring/commons-logging-1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/spring/spring-aop-4.1.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/spring/spring-aspects-4.1.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/spring/spring-beans-4.1.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/spring/spring-context-4.1.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/spring/spring-core-4.1.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/spring/spring-expression-4.1.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/c3p0-0.9.1.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/content.jar"/>
-	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/javax.annotation.jar"/>
-	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/json-simple-1.1.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/log4j-1.2.16.jar"/>
-	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/mysql-connector-java-5.1.46.jar"/>
-	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/mysql-connector-java-5.1.46-bin.jar"/>
-	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/quartz-2.2.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/quartz-jobs-2.2.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/slf4j-api-1.7.7.jar"/>
-	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/slf4j-log4j12-1.7.7.jar"/>
-	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/mongodb-driver-3.8.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/mongodb-driver-async-3.8.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/mongodb-driver-core-3.8.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/bson-3.8.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/javax.annotation.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/com.fasterxml.jackson.databind.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/gson-2.6.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/jackson-annotations-2.1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/jackson-core-2.2.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/content.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/mysql-connector-java-5.1.46/mysql-connector-java-5.1.46.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/mysql-connector-java-5.1.46/mysql-connector-java-5.1.46-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/mongo-java-driver-3.8.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/features"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/features/org.aspectj.source_1.8.13.201805251550.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/features/org.aspectj_1.8.13.201805251550.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/features/org.eclipse.ajdt.source_2.2.4.201805251550.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/features/org.eclipse.ajdt_2.2.4.201805251550.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/features/org.eclipse.contribution.weaving.source_2.2.4.201805251550.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/features/org.eclipse.contribution.weaving_2.2.4.201805251550.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/features/org.eclipse.contribution.xref.source_2.2.4.201805251550.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/features/org.eclipse.contribution.xref_2.2.4.201805251550.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/features/org.eclipse.equinox.weaving.sdk_1.2.0.201805251550.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/plugins/org.aspectj.ajde.source_1.8.13.201805251550.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/plugins/org.aspectj.ajde_1.8.13.201805251550.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/plugins/org.aspectj.runtime.source_1.8.13.201805251550.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/plugins/org.aspectj.runtime_1.8.13.201805251550.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/plugins/org.aspectj.weaver.source_1.8.13.201805251550.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/plugins/org.aspectj.weaver_1.8.13.201805251550.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/plugins/org.eclipse.ajdt.core.source_2.2.4.201805251550.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/plugins/org.eclipse.ajdt.core_2.2.4.201805251550.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/plugins/org.eclipse.ajdt.doc.user_2.2.4.201805251550.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/plugins/org.eclipse.ajdt.examples.source_2.2.4.201805251550.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/plugins/org.eclipse.ajdt.examples_2.2.4.201805251550.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/plugins/org.eclipse.ajdt.ui.source_2.2.4.201805251550.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/plugins/org.eclipse.ajdt.ui_2.2.4.201805251550.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/plugins/org.eclipse.aspectj_2.2.4.201805251550.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/plugins/org.eclipse.contribution.visualiser.source_2.2.4.201805251550.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/plugins/org.eclipse.contribution.visualiser_2.2.4.201805251550.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/plugins/org.eclipse.contribution.weaving.jdt.source_2.2.4.201805251550.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/plugins/org.eclipse.contribution.weaving.jdt_2.2.4.201805251550.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/plugins/org.eclipse.contribution.xref.core.source_2.2.4.201805251550.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/plugins/org.eclipse.contribution.xref.core_2.2.4.201805251550.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/plugins/org.eclipse.contribution.xref.ui.source_2.2.4.201805251550.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/plugins/org.eclipse.contribution.xref.ui_2.2.4.201805251550.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/plugins/org.eclipse.equinox.weaving.aspectj_1.0.400.201805251550.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/plugins/org.eclipse.equinox.weaving.caching_1.1.0.v20161007-1415.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/plugins/org.eclipse.equinox.weaving.hook_1.2.0.v20160929-1449.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/spring/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/spring/spring-aop-4.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/spring/spring-aspects-4.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/spring/spring-beans-4.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/spring/spring-context-4.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/spring/spring-core-4.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/spring/spring-expression-4.1.0.RELEASE.jar"/>
+	<classpathentry kind="con" path="org.eclipse.ajdt.core.ASPECTJRT_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

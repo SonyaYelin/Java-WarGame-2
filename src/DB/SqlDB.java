@@ -1,40 +1,37 @@
 package DB;
 
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
 
 public class SqlDB implements IDB {
 
-	private static Connection connection;
+	private static final String SQL_URL = "jdbc:mysql://localhost/";
 	private static final String DB_URL = "jdbc:mysql://localhost/WAR";
-	private static ResultSet rs;
+	private static final String ROOT = "root";
+
+	private static Connection 	connection;
+	private static ResultSet 	rs;
 
 	static {
-
 		try {
 			Driver driver = new com.mysql.jdbc.Driver();
 			DriverManager.registerDriver(driver);
 
-			String url = "jdbc:mysql://localhost/";
-			connection = DriverManager.getConnection(url, "root", "");
+			String url = SQL_URL;
+			connection = DriverManager.getConnection(url, ROOT, "");
 			
 			if ( !checkDBExists(DB_NAME, connection)) {
 				createDataBase(DB_NAME);
-				connection = DriverManager.getConnection(DB_URL, "root", "");
+				connection = DriverManager.getConnection(DB_URL, ROOT, "");
 				createTables();
 			}
 			else
-				connection = DriverManager.getConnection(DB_URL, "root", "");
+				connection = DriverManager.getConnection(DB_URL, ROOT, "");
 
 		} catch (SQLException e) {
 			while (e != null) {
@@ -48,18 +45,18 @@ public class SqlDB implements IDB {
 		try {
 			Statement stmt = connection.createStatement();
 
-			String createLaunchers = "CREATE TABLE missile_launchers " + "(id VARCHAR(255) not NULL, "
-					+ "is_hidden BOOLEAN not NULL, " + "is_destructed BOOLEAN not NULL, "
-					+ "launched_missiles INT not NULL," + "missile_hits INT not NULL," + "PRIMARY KEY ( id ))";
+			String createLaunchers = "CREATE TABLE " + MISSILE_LAUNCHERS + " ("+ ID + " VARCHAR(255) not NULL, "
+					+ IS_HIDDEN + " BOOLEAN not NULL, " + IS_DESTRUCTED + " BOOLEAN not NULL, "
+					+ LAUNCHED_MISSILES +" INT not NULL," + MISSILE_HITS + " INT not NULL," + "PRIMARY KEY ( " + ID + " ))";
 			stmt.executeUpdate(createLaunchers);
 
 			stmt = connection.createStatement();
-			String createMissileDestructors = "CREATE TABLE missile_destructors " + "(id VARCHAR(255) not NULL, "
-					+ "destructed_missiles INT not NULL, " + "PRIMARY KEY ( id ))";
+			String createMissileDestructors = "CREATE TABLE " + MISSILE_DESTRUCTORS + " ("+ ID + " VARCHAR(255) not NULL, "
+					+ DESTRUCTED_MISSILES + " INT not NULL, " + "PRIMARY KEY ( " + ID + " ))";
 			stmt.executeUpdate(createMissileDestructors);
 			
-			String createLauncherDestructors = "CREATE TABLE launcher_destructors " + "(id VARCHAR(255) not NULL, "
-					+ "type VARCHAR(255) not NULL, " + "destructed_launchers INT not NULL, " + "PRIMARY KEY ( id ))";
+			String createLauncherDestructors = "CREATE TABLE " + LAUNCHER_DESTRUCTORS + " ("+ ID + " VARCHAR(255) not NULL, "
+					+ TYPE + " VARCHAR(255) not NULL, " + DESTRUCTED_LAUNCHERS + " INT not NULL, " + "PRIMARY KEY ( " + ID + " ))";
 			stmt.executeUpdate(createLauncherDestructors);
 		
 		} catch (SQLException e) {e.printStackTrace();}
@@ -297,73 +294,7 @@ public class SqlDB implements IDB {
 				rs.close();
 			}
 		} catch (Exception e) {
-			System.out.println("Could not close the current connection.");
 			e.printStackTrace();
 		}
 	}
-
-	// public List<String> getAllTablesNames() {
-	// List<String> allTables = new ArrayList<String>();
-	// try {
-	// DatabaseMetaData md = connection.getMetaData();
-	// ResultSet rs = md.getTables(null, null, "%", null);
-	//
-	// while (rs.next()) {
-	// allTables.add(rs.getString(3));
-	// }
-	// } catch (SQLException e) {
-	// while (e != null) {
-	// e.printStackTrace();
-	// e = e.getNextException();
-	// }
-	// }
-	// return allTables;
-	// }
-
-	// ??
-	// public void getFromDB(String id, String from) {
-	// try {
-	// ResultSet rs = statement.executeQuery("SELECT * FROM " + from + " WHERE id="
-	// + id);
-	//
-	// } catch (SQLException e) {
-	// while (e != null) {
-	// System.out.println(e.getMessage());
-	// e = e.getNextException();
-	// }
-	// }
-	// }
-
-	// get all table data
-	// public Vector<String[]> getQueryData(String tableName, Vector<String>
-	// headers) {
-	// Vector<String[]> rowsData = new Vector<String[]>();
-	// try {
-	// PreparedStatement statement = (PreparedStatement)
-	// connection.prepareStatement("SELECT * FROM " + tableName);
-	// rs = statement.executeQuery();
-	// ResultSetMetaData meta = rs.getMetaData();
-	// int numOfCols = meta.getColumnCount();
-	//
-	// // rebuild the headers array with the new column names
-	// headers.clear();
-	// for (int h = 1; h <= numOfCols; h++) {
-	// headers.add(meta.getColumnName(h));
-	// }
-	//
-	// while (rs.next()) {
-	// String[] record = new String[numOfCols];
-	// for (int i = 0; i < numOfCols; i++) {
-	// record[i] = rs.getString(i + 1);
-	// }
-	// rowsData.addElement(record);
-	// }
-	// } catch (SQLException e) {
-	// while (e != null) {
-	// e.printStackTrace();
-	// e = e.getNextException();
-	// }
-	// }
-	// return rowsData;
-	// }
 }

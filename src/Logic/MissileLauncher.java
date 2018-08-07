@@ -24,7 +24,7 @@ public class MissileLauncher implements Runnable {
 
 	public MissileLauncher(String id) {
 		this.id = id;
-		// seed if hidden
+		// see if hidden
 		Random random = new Random();
 		this.isHidden = random.nextBoolean();
 		this.missilesToLaunch = new Vector<Missile>();
