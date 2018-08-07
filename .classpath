@@ -6,25 +6,34 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/javax.annotation.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/spring/commons-logging-1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/spring/spring-aop-4.1.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/spring/spring-aspects-4.1.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/spring/spring-beans-4.1.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/spring/spring-context-4.1.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/spring/spring-core-4.1.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/spring/spring-expression-4.1.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/aspect/aopalliance-1.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/aspect/aspectjrt-1.6.9.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/aspect/aspectjweaver-1.6.9.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/com.fasterxml.jackson.databind.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/gson-2.6.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/jackson-annotations-2.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/jackson-core-2.2.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/content.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/aspectj-1.9.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/mysql-connector-java-5.1.46/mysql-connector-java-5.1.46.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/גאווה מתקדם/mysql-connector-java-5.1.46/mysql-connector-java-5.1.46-bin.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sonya/Downloads/mongo-java-driver-3.8.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/com.fasterxml.jackson.databind.jar"/>
+	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/gson-2.6.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/jackson-annotations-2.1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/jackson-core-2.2.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/aspect/aopalliance-1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/aspect/aspectjrt-1.6.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/aspect/aspectjweaver-1.6.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/spring/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/spring/spring-aop-4.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/spring/spring-aspects-4.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/spring/spring-beans-4.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/spring/spring-context-4.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/spring/spring-core-4.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/spring/spring-expression-4.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/c3p0-0.9.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/content.jar"/>
+	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/javax.annotation.jar"/>
+	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/mysql-connector-java-5.1.46.jar"/>
+	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/mysql-connector-java-5.1.46-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/quartz-2.2.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/quartz-jobs-2.2.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/slf4j-api-1.7.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/external-dependencies/slf4j-log4j12-1.7.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/mongodb-driver-3.8.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/mongodb-driver-async-3.8.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/mongodb-driver-core-3.8.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/adamm/workspace/Jave-WarGame-2/bson-3.8.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
