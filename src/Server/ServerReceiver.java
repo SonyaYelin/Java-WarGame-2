@@ -3,7 +3,10 @@ package Server;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,6 +14,7 @@ import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.security.GeneralSecurityException;
 import java.security.KeyFactory;
 import java.security.PrivateKey;
@@ -23,9 +27,30 @@ import javax.crypto.Cipher;
 import javax.crypto.CipherInputStream;
 import javax.crypto.spec.SecretKeySpec;
 
-public class ServerReceiver {
+import UI.VisualApplication;
+
+public class ServerReceiver implements Runnable{
 	private static final int WANTED_PORT = 29888;
-	public static void main(String [] args) throws Exception {
+	private static VisualApplication theApplication;
+	
+	public ServerReceiver(VisualApplication theApplication) {
+		this.theApplication = theApplication;
+	}
+	
+	private static void addMissileLauncher(String id) {
+		theApplication.getGamePanel().addMissileLauncher(id);
+	}
+	
+	private static void launchMissile(String missileLauncherId, String missileID,String destination, int damage) {
+		theApplication.getGamePanel().launchMissile(missileLauncherId, missileID, destination, damage);
+	}
+	
+	private static void destructMissile(String missileIdToDestruct, String missileDestructorId) {
+		theApplication.getGamePanel().destructMissile(missileIdToDestruct, missileDestructorId);
+	}
+	
+	
+	public void startServer() throws Exception {
 		System.out.println("Running server...");
 		ServerSocket listener = new ServerSocket(getAvailablePort(WANTED_PORT));
 		try {
@@ -175,6 +200,8 @@ public class ServerReceiver {
 					ProtocolUtilities.handleFile(file);
 					out.write("SUCCESS\nsuccessful transmission\n\n".getBytes("ASCII"));
 					out.flush();
+					readFile(file);
+					deleteFile(file);
 					socket.close();
 				} catch (GeneralSecurityException e) {
 					sendErrorMessage("Failed to decrypt AES key and/or file content.");
@@ -191,5 +218,38 @@ public class ServerReceiver {
 				System.out.println("Invalid command detected: " + command);
 			}
 		}
+
+		private void deleteFile(File file) {
+			file.deleteOnExit();
+		}
+		
+		private void readFile(File file) {
+		    try {
+		    	for (String line : Files.readAllLines(Paths.get(file.getAbsolutePath()))) {
+	    		String[] splitStr = line.split("\\s+");
+	    			if(splitStr[0] == "addMissileLauncher") {
+	    				addMissileLauncher(splitStr[1]);
+	    			} else if(splitStr[0] == "launchMissile") {
+	    				launchMissile(splitStr[1], splitStr[2], splitStr[3], Integer.parseInt(splitStr[4]));
+	    			} else if(splitStr[0] == "destructMissile") {
+	    				destructMissile(splitStr[1], splitStr[2]);
+	    			}
+	    		}
+		    } catch (FileNotFoundException e) {
+		      e.printStackTrace();
+		    } catch (IOException e) {
+		      e.printStackTrace();
+		    }
+		}
+	}
+
+	@Override
+	public void run() {
+		try {
+			this.startServer();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 }
