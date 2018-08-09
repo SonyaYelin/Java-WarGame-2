@@ -10,7 +10,9 @@ public class CloseApplicationUtil {
 		
 		if (response == DialogResponse.YES) {*/
 		if (true) {
+			System.out.println("exiting platform");
 			Platform.exit();
+			System.exit(1);
 		}
 	}
 }

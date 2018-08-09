@@ -268,7 +268,6 @@ public class GamePane extends AnchorPane implements GameUI {
 		for (GameUIEventsListener l : allListeners)
 			l.exitFromUI();
 		CloseApplicationUtil.closeApplication(theApplication);
-
 	}
 
 	

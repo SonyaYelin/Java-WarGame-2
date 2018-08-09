@@ -26,11 +26,12 @@ public class MongoDB implements IDB{
 
 	@Override
 	public void closeDB() {
+		
 		mongoClient.close();		
 	}
 
 	@Override
-	public void addMissileLuauncher(String id, boolean isHidden) {
+	public  synchronized  void addMissileLuauncher(String id, boolean isHidden) {
 		MongoCollection<Document> collection = database.getCollection(MISSILE_LAUNCHERS);
 		
 		collection.updateOne(Filters.eq(ID, id),  Updates.combine( 
@@ -43,7 +44,7 @@ public class MongoDB implements IDB{
 	}
 
 	@Override
-	public void addMissileDestructor(String id) {
+	public synchronized  void addMissileDestructor(String id) {
 		MongoCollection<Document> collection = database.getCollection(MISSILE_DESTRUCTORS);
 		
 		collection.updateOne(Filters.eq(ID, id),  Updates.combine( Updates.set(ID, id), Updates.set(DESTRUCTED_MISSILES, 0) ),
@@ -51,7 +52,7 @@ public class MongoDB implements IDB{
 	}
 
 	@Override
-	public void addLauncherDestructor(String id, String type) {
+	public  synchronized  void addLauncherDestructor(String id, String type) {
 		MongoCollection<Document> collection = database.getCollection(LAUNCHER_DESTRUCTORS);
 	
 		collection.updateOne(Filters.eq(ID, id),  Updates.combine( 
@@ -62,7 +63,7 @@ public class MongoDB implements IDB{
 	}
 
 	@Override
-	public void addMissileLaunch(String id) {
+	public  synchronized  void addMissileLaunch(String id) {
 		MongoCollection<Document> collection = database.getCollection(MISSILE_LAUNCHERS);
 		Document d = collection.find(Filters.eq(ID, id)).first();
 		
@@ -71,17 +72,17 @@ public class MongoDB implements IDB{
 	}
 
 	@Override
-	public void addMissileHit(String id) {
+	public  synchronized void addMissileHit(String id) {
 		MongoCollection<Document> collection = database.getCollection(MISSILE_LAUNCHERS);
 		Document d = collection.find(Filters.eq(ID, id)).first();
 		
 		int missileHits = d.getInteger(MISSILE_HITS, 0) + 1;
 		collection.updateMany(Filters.eq(ID, id), 
 								Updates.set(MISSILE_HITS, missileHits));    
-	}
+	} 
 
 	@Override
-	public void addMissileDestruct(String id) {
+	public  synchronized  void addMissileDestruct(String id) {
 		MongoCollection<Document> collection = database.getCollection(MISSILE_DESTRUCTORS);
 		Document d = collection.find(Filters.eq(ID, id)).first();
 		
@@ -91,7 +92,7 @@ public class MongoDB implements IDB{
 	}
 
 	@Override
-	public void addLauncherDestruct(String destructorID, String launcherID) {
+	public synchronized void addLauncherDestruct(String destructorID, String launcherID) {
 		MongoCollection<Document> collection = database.getCollection(LAUNCHER_DESTRUCTORS);
 		Document d = collection.find(Filters.eq(ID, destructorID)).first();
 		

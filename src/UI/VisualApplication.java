@@ -1,7 +1,6 @@
 package UI;
 
 import Handlers.ConfigHandler;
-import Logic.Game;
 import MVC.GameController;
 import Server.ServerReceiver;
 import Util.CloseApplicationUtil;
@@ -30,9 +29,9 @@ public class VisualApplication extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		
+
 		mainPanel = new BorderPane();
-	
+
 		Scene scene = new Scene(mainPanel, SETTINGS.SCREEN_WIDTH, SETTINGS.SCREEN_HEIGHT);
 
 		this.primaryStage = primaryStage;
@@ -48,27 +47,27 @@ public class VisualApplication extends Application {
 		menu = new VisualMenu(this);
 		gamePanel = new GamePane(this);
 		serverReceiver = new ServerReceiver(this);
-        
+
 		Thread serverThread = new Thread(serverReceiver);
 		serverThread.start();
-		
+
 		primaryStage.setTitle("War Game");
 
 		gamePanel.setId("game_pane");
 		menu.setId("menu_box");
-		
+
 		mainPanel.setRight(menu);
 		mainPanel.setLeft(gamePanel);
 
 		menu.setAlignment(Pos.TOP_RIGHT);
-		menu.getStyleClass().addAll("vbox","button");
-		
+		menu.getStyleClass().addAll("vbox", "button");
+
 		new GameController(gamePanel);
 		configDialog();
 		primaryStage.show();
 
-	
 	}
+
 	private void configDialog() {
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 		alert.setTitle("Load");
@@ -77,15 +76,15 @@ public class VisualApplication extends Application {
 		ButtonType noButton = new ButtonType("No", ButtonData.NO);
 		alert.getButtonTypes().setAll(okButton, noButton);
 		alert.showAndWait().ifPresent(type -> {
-		        if (type.getText() == "Yes") {
-		        	try {
-						new ConfigHandler().readObjectsFromJSONFile();
-					} catch (InterruptedException e1) {
-						e1.printStackTrace();
-					}
-		        } else if (type == ButtonType.NO) {
-		        }
-		});		
+			if (type.getText() == "Yes") {
+				try {
+					new ConfigHandler().readObjectsFromJSONFile();
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
+				}
+			} else if (type == ButtonType.NO) {
+			}
+		});
 	}
 
 	public GamePane getGamePanel() {
@@ -95,11 +94,14 @@ public class VisualApplication extends Application {
 	public Stage getPrimaryStage() {
 		return primaryStage;
 	}
+
 	public VisualMenu getMenu() {
 		return menu;
 	}
 
 	public static void main(String[] args) {
+
 		launch(args);
+
 	}
 }

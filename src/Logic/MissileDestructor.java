@@ -6,16 +6,15 @@ import java.util.Vector;
 import java.util.logging.Level;
 
 
-public class MissileDestructor implements MissileLaunchListener,Runnable {
+public class MissileDestructor extends WarObject implements MissileLaunchListener,Runnable {
  
-	private String id;
 	private Map<String,Integer> missilesToDestruct;
 	private int currentWaitingTime;
 	private Missile currentMissileToDestruct;
 	private Vector<MissileDestructListener> listeners;
 	
 	public MissileDestructor(String id) {
-		this.id = id;
+		super(id);
 		this.missilesToDestruct = new HashMap<String,Integer>();
 		this.listeners = new Vector<MissileDestructListener>();
 	}
@@ -28,9 +27,6 @@ public class MissileDestructor implements MissileLaunchListener,Runnable {
 	}
 	public void setMissilesToDestruct(Map<String, Integer> missilesToDestruct) {
 		this.missilesToDestruct = missilesToDestruct;
-	}
-	public String getID() {
-		return id;
 	}
 	
 	public void registerListener(MissileDestructListener newListener) {
@@ -64,12 +60,16 @@ public class MissileDestructor implements MissileLaunchListener,Runnable {
 	public void run() {
 		//GameLogger.log(this, Level.INFO, "In Missile Desturctor "+ id +" ::run");
 
-		while(true){
+		while(!isGameOver()){
 			try {
 				synchronized (this) {
+					this.setWaiting(true);
 					wait();
-					DestructTarget target = new DestructTarget(currentMissileToDestruct, currentWaitingTime, this);
-					notifyAllListener(target);
+					this.setWaiting(false);
+					if(!isGameOver()) {
+						DestructTarget target = new DestructTarget(currentMissileToDestruct, currentWaitingTime, this);
+						notifyAllListener(target);
+					}
 				}
 
 			} catch (InterruptedException e) {

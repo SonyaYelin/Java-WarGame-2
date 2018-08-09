@@ -31,11 +31,11 @@ public class Missile extends Thread implements Comparable<Missile> {
 	public void launch() throws InterruptedException {
 		synchronized (this) {
 			Thread.sleep(launchTime * 1000);
-			theLauncher.addWaitingMissile(this);
-			//GameLogger.log(theLauncher, Level.INFO,"Missile #" + getMissileId() + " is waiting to launch ");
-			// gets notified by launcher
-			wait();
-			//GameLogger.log(theLauncher, Level.INFO,"Missile #" + getMissileId() + " started launch to "+destination);
+			if(!theLauncher.isGameOver() && !theLauncher.isDestroyed()) {
+				theLauncher.addWaitingMissile(this);
+				// gets notified by launcher
+				wait();
+			}
 		}
 
 	}
