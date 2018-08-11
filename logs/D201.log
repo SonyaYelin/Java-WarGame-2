@@ -1,0 +1,6 @@
+2018-08-10T16:34:09.5557797: missile-destructor #D201 just started destructing missile #M1
+2018-08-10T16:34:11.849466: missile-destructor #D201 just started destructing missile #M3
+2018-08-10T16:34:13.5614859: missile-destructor #D201 finished destructing missile #M1is destructed: true
+2018-08-10T16:34:16.8835833: missile-destructor #D201 just started destructing missile #M4
+2018-08-10T16:34:18.9014255: missile-destructor #D201 finished destructing missile #M4is destructed: true
+2018-08-10T16:34:19.8538815: missile-destructor #D201 finished destructing missile #M3is destructed: false

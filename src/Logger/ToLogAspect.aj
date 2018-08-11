@@ -45,8 +45,6 @@ public aspect ToLogAspect {
 	}
 	
 	before() : missileLandEvent() {
-		if( !GameLogger.isClosed() )
-			return;
 		Missile m = (Missile)thisJoinPoint.getArgs()[0];
 		MissileLauncher ml = m.getTheLauncher();	
 		GameLogger.log(ml, Level.INFO, "missile #" + m.getMissileId()
@@ -57,8 +55,6 @@ public aspect ToLogAspect {
 	
 	//destruct launcher	
 	before() : launcherDestructorLaunchEvent() {
-		if( !GameLogger.isClosed() )
-			return;
 		LauncherDestructTarget ldt = (LauncherDestructTarget)thisJoinPoint.getArgs()[0];
 		 MissileLauncherDestructor mld = ldt.getDestructor();
 		GameLogger.log(mld, Level.INFO, "missile-launcher-destructor #" + mld.getID()
@@ -66,8 +62,6 @@ public aspect ToLogAspect {
 	}
 
 	before() : launcherDestructorLandEvent() {
-		if( !GameLogger.isClosed() )
-			return;
 		LauncherDestructTarget ldt = (LauncherDestructTarget)thisJoinPoint.getArgs()[0];
 		 MissileLauncherDestructor mld = ldt.getDestructor();
 		GameLogger.log(mld, Level.INFO, "missile-launcher-destructor #" + mld.getID()
@@ -77,8 +71,6 @@ public aspect ToLogAspect {
 
 	//destruct missile
 	before() : missileDestructorLaunchEvent() {
-		if( !GameLogger.isClosed() )
-			return;
 		DestructTarget dt = (DestructTarget)thisJoinPoint.getArgs()[0];
 
 		MissileDestructor md = dt.getDestructor();
@@ -87,8 +79,6 @@ public aspect ToLogAspect {
 	}
 		
 	before() : missileDestructorLandEvent() {
-		if( !GameLogger.isClosed() )
-			return;
 		DestructTarget dt = (DestructTarget)thisJoinPoint.getArgs()[0];
 
 		 MissileDestructor md = dt.getDestructor();		
