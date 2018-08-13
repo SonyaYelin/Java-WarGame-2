@@ -36,8 +36,6 @@ public aspect ToLogAspect {
 	
 	//launch
 	before() : missileLaunchEvent() {
-		if( !GameLogger.isClosed() )
-			return;
 		Missile m = (Missile)thisJoinPoint.getArgs()[0];
 		MissileLauncher ml = m.getTheLauncher();
 		GameLogger.log(ml, Level.INFO, "missile-launcher #" + ml.getID()

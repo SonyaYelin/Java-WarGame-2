@@ -40,8 +40,8 @@ public class GameLogger {
     }
 
     public static void close() {
-
-
+    	for( Handler h: logger.getHandlers() )
+    	    h.close();
     }
     
     public static boolean isClosed() {

@@ -99,7 +99,6 @@ public class GamePane extends AnchorPane implements GameUI {
 	@Override
 	public void registerListener(GameUIEventsListener listener) {
 		allListeners.add(listener);
-
 	}
 
 	@Override
@@ -139,7 +138,6 @@ public class GamePane extends AnchorPane implements GameUI {
 			missileLauncherDestructorLocationMap.put(type, numOfMissileLD_ship);
 			numOfMissileLD_ship++;
 		}
-
 	}
 
 	@Override
