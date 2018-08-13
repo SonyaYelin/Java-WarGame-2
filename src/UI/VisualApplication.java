@@ -22,7 +22,7 @@ public class VisualApplication extends Application {
 	private BorderPane mainPanel;
 	private GamePane gamePanel;
 	private VisualMenu menu;
-	private ServerReceiver serverReceiver;
+	//private ServerReceiver serverReceiver;
 
 	public BorderPane getMainPanel() {
 		return mainPanel;
@@ -47,10 +47,10 @@ public class VisualApplication extends Application {
 		});
 		menu = new VisualMenu(this);
 		gamePanel = new GamePane(this);
-		serverReceiver = new ServerReceiver(this);
+		//serverReceiver = new ServerReceiver(this);
         
-		Thread serverThread = new Thread(serverReceiver);
-		serverThread.start();
+		// Thread serverThread = new Thread(serverReceiver);
+		// serverThread.start();
 		
 		primaryStage.setTitle("War Game");
 

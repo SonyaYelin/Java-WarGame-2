@@ -22,31 +22,46 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Vector;
 
 import javax.crypto.Cipher;
 import javax.crypto.CipherInputStream;
 import javax.crypto.spec.SecretKeySpec;
 
+import MVC.GameModelEventsListener;
+import MVC.GameUIEventsListener;
 import UI.VisualApplication;
 
 public class ServerReceiver implements Runnable{
 	private static final int WANTED_PORT = 29888;
-	private static VisualApplication theApplication;
+	private static Vector<GameUIEventsListener> allListeners;
 	
-	public ServerReceiver(VisualApplication theApplication) {
-		this.theApplication = theApplication;
+	public ServerReceiver() {
+		allListeners = new Vector<GameUIEventsListener>();
+
+
+	}
+	
+	public void registerListener(GameModelEventsListener listener) {
+		allListeners.add(listener);
 	}
 	
 	private static void addMissileLauncher(String id) {
-		theApplication.getGamePanel().addMissileLauncher(id);
+		for (GameUIEventsListener g : allListeners) {
+			g.addMissileLauncherFromUI(id);
+		}
 	}
 	
 	private static void launchMissile(String missileLauncherId, String missileID,String destination, int damage) {
-		theApplication.getGamePanel().launchMissile(missileLauncherId, missileID, destination, damage);
+		for (GameUIEventsListener g : allListeners) {
+			g.launchMissileFromUI(missileLauncherId, missileID, destination, damage);
+		}
 	}
 	
 	private static void destructMissile(String missileIdToDestruct, String missileDestructorId) {
-		theApplication.getGamePanel().destructMissile(missileIdToDestruct, missileDestructorId);
+		for (GameUIEventsListener g : allListeners) {
+			g.destructMissileFromUI(missileIdToDestruct, missileDestructorId);
+		}
 	}
 	
 	
