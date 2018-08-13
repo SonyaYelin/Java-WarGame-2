@@ -32,25 +32,19 @@ public class DestructTarget extends Thread {
 	@Override
 	public void run() {
 		try {
-			//GameLogger.log(destructor, Level.INFO, "Desturctor "+ destructor.getId() +" Launcher waits "+waitingTime+ " for "+target.getMissileId());
 			Thread.sleep(waitingTime*1000);
 
-			//GameLogger.log(destructor, Level.INFO, "Desturctor "+ destructor.getId() +" finish waiting to "+target.getMissileId());
-
-			if(waitingTime< target.getFlyTime() && !target.isDestructed())
-			{
-				synchronized (target) {
-					target.setDestructed(true);
-					target.notify();
-					target.setDestructed(true);
+			if(!destructor.isGameOver()) {
+				if(waitingTime< target.getFlyTime() && !target.isDestructed())
+				{
+					synchronized (target) {
+						target.setDestructed(true);
+						target.notify();
+						target.setDestructed(true);
+					}
 				}
-				//GameLogger.log(destructor, Level.INFO, "Desturctor "+ destructor.getId() +" destoryed "+target.getMissileId());
+					destructor.notifyAllListenerResult(this);
 			}
-			//else
-				//GameLogger.log(destructor, Level.INFO, "Desturctor "+ destructor.getId() +" missed "+target.getMissileId());
-
-			destructor.notifyAllListenerResult(this);
-
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

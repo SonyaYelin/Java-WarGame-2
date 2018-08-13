@@ -175,6 +175,8 @@ public class ServerReceiver implements Runnable{
 
 		public void run() {
 			String command;
+			System.out.println("server thread id: " + Thread.currentThread().getId());
+
 			try {
 				in = new BufferedInputStream(socket.getInputStream());
 				out = new BufferedOutputStream(socket.getOutputStream());

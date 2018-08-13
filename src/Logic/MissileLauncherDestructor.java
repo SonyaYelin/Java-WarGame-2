@@ -4,21 +4,18 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Vector;
-import java.util.logging.Level;
 
 
-public class MissileLauncherDestructor implements Runnable{
+public class MissileLauncherDestructor extends WarObject implements Runnable{
 
 	private static int iDGen;
 	
-	private String id;
 	private String type;
 	private Map<Integer,MissileLauncher> launchersToDestruct = new HashMap<>();
 	private Vector<LauncherDestructListener> listeners;
 
 	public MissileLauncherDestructor(String type) {
-		super();
-		this.id = ""+iDGen++;
+		super(""+iDGen++);
 		this.type = type;
 		this.listeners = new Vector<LauncherDestructListener>();
 	}
@@ -56,8 +53,7 @@ public class MissileLauncherDestructor implements Runnable{
 	
 	@Override
 	public void run() {
-		//GameLogger.log(this, Level.INFO, "In Missile Launcher Destructor " + type + " ::run");
-		while(true){
+		while(!isGameOver()){
 			if(!launchersToDestruct.isEmpty()){
 				for(Iterator<Map.Entry<Integer, MissileLauncher>> it = launchersToDestruct.entrySet().iterator(); it.hasNext(); ) {
 				      Map.Entry<Integer, MissileLauncher> entry = it.next();
@@ -69,7 +65,9 @@ public class MissileLauncherDestructor implements Runnable{
 				else{
 					synchronized (this) {
 						try {
+							setWaiting(true);
 							wait();
+							setWaiting(false);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -80,13 +78,6 @@ public class MissileLauncherDestructor implements Runnable{
 			
 		}
 
-
-	public String getID() {
-		return id;
-	}
-		
-	
- 
 
 	
 	

@@ -1,7 +1,6 @@
 package UI;
 
 import Handlers.ConfigHandler;
-import Logic.Game;
 import MVC.GameController;
 import Server.ServerReceiver;
 import Util.CloseApplicationUtil;
@@ -22,6 +21,7 @@ public class VisualApplication extends Application {
 	private BorderPane mainPanel;
 	private GamePane gamePanel;
 	private VisualMenu menu;
+	//private ServerReceiver serverReceiver;
 
 	public BorderPane getMainPanel() {
 		return mainPanel;
@@ -29,6 +29,7 @@ public class VisualApplication extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+
 		mainPanel = new BorderPane();
 
 		Scene scene = new Scene(mainPanel, SETTINGS.SCREEN_WIDTH, SETTINGS.SCREEN_HEIGHT);
@@ -45,11 +46,19 @@ public class VisualApplication extends Application {
 		});
 		menu = new VisualMenu(this);
 		gamePanel = new GamePane(this);
+<<<<<<< HEAD
 		//serverReceiver = new ServerReceiver(this);
         
 		// Thread serverThread = new Thread(serverReceiver);
 		// serverThread.start();
 		
+=======
+		serverReceiver = new ServerReceiver(this);
+
+		Thread serverThread = new Thread(serverReceiver);
+		serverThread.start();
+
+>>>>>>> 35f5386f296ccb41afce4abf436c27a62088b65e
 		primaryStage.setTitle("War Game");
 
 		gamePanel.setId("game_pane");

@@ -5,9 +5,8 @@ import java.util.Queue;
 import java.util.Random;
 import java.util.Vector;
 
-public class MissileLauncher implements Runnable {
+public class MissileLauncher extends WarObject implements Runnable {
 
-	private String id;
 	private boolean isHidden;
 	private Vector<Missile> missilesToLaunch;
 	private Queue<Missile> waitingMissiles = new PriorityQueue<Missile>();
@@ -16,23 +15,19 @@ public class MissileLauncher implements Runnable {
 	private int launchedMissileCounter =0;
 
 	public MissileLauncher(String id, boolean isHidden) {
-		this.id = id;
+		super(id);
 		this.isHidden = isHidden;
 		this.missilesToLaunch = new Vector<Missile>();
 		this.listeners = new Vector<MissileLaunchListener>();
 	}
 
 	public MissileLauncher(String id) {
-		this.id = id;
+		super(id); 
 		// see if hidden
 		Random random = new Random();
 		this.isHidden = random.nextBoolean();
 		this.missilesToLaunch = new Vector<Missile>();
 		this.listeners = new Vector<MissileLaunchListener>();
-	}
-
-	public String getID() {
-		return id;
 	}
 
 	public void setIsDestroyed(boolean val) {
@@ -73,9 +68,6 @@ public class MissileLauncher implements Runnable {
 	public synchronized void addWaitingMissile(Missile missile) {
 		waitingMissiles.add(missile);
 
-//		GameLogger.log(this, Level.INFO, "After adding missile #" + missile.getMissileId() + " there are " + waitingMissiles.size()
-//		+ " missiles waiting in " + id);
-
 		synchronized (/* dummyWaiter */this) {
 			if (waitingMissiles.size() == 1) {
 				/* dummyWaiter. */notify(); // to let know there is an missile
@@ -90,24 +82,18 @@ public class MissileLauncher implements Runnable {
 		if (isHidden)
 			wasHidden = true;
 		if (firstMissile != null) {
-			//GameLogger.log(this, Level.INFO, "MissileLauncher " + id + " is notifying Missile #" + firstMissile.getMissileId());
 			synchronized (firstMissile) {
 				firstMissile.notifyAll();
 				launchedMissileCounter++;
 				isHidden = false;
 			}
 		}
-
 		synchronized (this) {
 			try {
-				//GameLogger.log(this, Level.INFO,"MissileLauncher " + id + " waits that missile #" + firstMissile.getMissileId()
-				//+ " will land/be destructed");
-
+				
 				notifyAllLaunchListener(firstMissile);
 
 				wait(); // wait till the missile finishes
-//				GameLogger.log(this, Level.INFO,"Missile Launcher " + id + " was announced that Missile #"
-//						+ firstMissile.getMissileId() + " is landed/destructed ");
 				if (wasHidden)
 					isHidden = true;
 				notifyAllLandListener(firstMissile);
@@ -128,21 +114,17 @@ public class MissileLauncher implements Runnable {
 	}
 
 	public void run() {
-		//GameLogger.log(this, Level.INFO,"In Missile Launcher " + id + " ::run");
-		while (!isDestroyed) {
+		while (!isDestroyed && !isGameOver()) {
 			try {
 				if (!waitingMissiles.isEmpty()) {
 					launchMissile();
 					
 				} else {
 					synchronized (this) {
-						//GameLogger.log(this, Level.INFO,"Missile Launcher " + id + " has no missiles waiting");
-
+						this.setWaiting(true);
 						wait(); // wait till there is a missile waiting
-
+						this.setWaiting(false);
 						// gets notified
-						//GameLogger.log(this, Level.INFO,"Missile Launcher " + id + " was notified there is a missile waiting");
-
 
 					}
 				}
@@ -152,7 +134,7 @@ public class MissileLauncher implements Runnable {
 		}
 		//gets destroyed
 		//GameLogger.log(this, Level.INFO,"Missile Launcher " + id + " was Desrructed");
-		Thread.currentThread().interrupt();
+		//Thread.currentThread().interrupt();
 
 	}
 

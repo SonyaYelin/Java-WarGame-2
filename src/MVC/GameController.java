@@ -178,7 +178,9 @@ public class GameController implements GameModelEventsListener, GameUIEventsList
 
 	@Override
 	public void exitFromUI() {
+		//close logs
 		theGame.onExit();
+		//close database
 		db.closeDB();
 	}
 

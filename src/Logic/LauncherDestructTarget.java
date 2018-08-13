@@ -33,17 +33,14 @@ public class LauncherDestructTarget extends Thread {
 		try {
 			Thread.sleep(waitingTime*1000);
 			
-			//GameLogger.log(theDestructor, Level.INFO,"Missile Launcher Desturctor "+theDestructor.getType() +" finish waiting to "+target.getId());
+			if(!theDestructor.isGameOver() && !target.isGameOver()) {
 
-			if(!target.isHidden())
-			{
-				target.setIsDestroyed(true);
-				//GameLogger.log(theDestructor, Level.INFO,"Missile Launcher Desturctor "+theDestructor.getType() +" destoryed "+target.getId());
+				if (!target.isHidden()) 
+					target.setIsDestroyed(true);
+				
+				theDestructor.notifyAllListenerResult(this);
 			}
-			//else
-				//GameLogger.log(theDestructor, Level.INFO,"Missile Launcher Desturctor "+theDestructor.getType() +" missed "+target.getId());
 			
-			theDestructor.notifyAllListenerResult(this);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

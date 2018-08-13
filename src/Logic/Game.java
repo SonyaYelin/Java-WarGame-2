@@ -4,16 +4,11 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.Vector;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import Logger.ToLog;
 import MVC.GameModelEventsListener;
 
 public class Game implements MissileLaunchListener, LauncherDestructListener, MissileDestructListener {
 
-	private static final String LOGS_CONFIG = "logs-spring-config.xml";
-	private static final String GAME = "Game";
 
 	private static final int RANDOM_BOUND = 10;
 	private final static int MAX_NUM_OF_MISSILE_LAUNCHER = 5;
@@ -23,6 +18,8 @@ public class Game implements MissileLaunchListener, LauncherDestructListener, Mi
 	// singleton object
 	private static Game theGame;
 
+	private Vector<Thread> threadList = new Vector<>();
+	
 	private HashMap<String, MissileLauncher> missileLaunchers;
 	private HashMap<String, MissileDestructor> missileDestructors;
 	private HashMap<String, MissileLauncherDestructor> missileLauncherDestructors;
@@ -72,6 +69,7 @@ public class Game implements MissileLaunchListener, LauncherDestructListener, Mi
 				MissileLauncher missileLauncher = new MissileLauncher(id);
 				Thread newmlT = new Thread(missileLauncher);
 				newmlT.start();
+				threadList.add(newmlT);
 				addMissileLauncher(missileLauncher);
 			} else
 				fireNotificationFailedAddMissileLauncher("Too Many Missile Launchers/already exist");
@@ -110,6 +108,8 @@ public class Game implements MissileLaunchListener, LauncherDestructListener, Mi
 				MissileDestructor newmd = new MissileDestructor(id);
 				Thread newmdT = new Thread(newmd);
 				newmdT.start();
+				threadList.add(newmdT);
+
 				addMissileDestructor(newmd);
 			} else
 				fireNotificationFailedAddMissileDestructor("Too Many Missile Destructors/already exist");
@@ -148,6 +148,8 @@ public class Game implements MissileLaunchListener, LauncherDestructListener, Mi
 				MissileLauncherDestructor newmld = new MissileLauncherDestructor(type);
 				Thread newmldT = new Thread(newmld);
 				newmldT.start();
+				threadList.add(newmldT);
+
 				addLauncherDestructor(newmld);
 			} else
 				fireNotificationFailedAddMissileLauncherDestructor(
@@ -168,15 +170,19 @@ public class Game implements MissileLaunchListener, LauncherDestructListener, Mi
 		for (MissileLauncher launcher : missileLaunchers.values()) {
 			Thread newmlT = new Thread(launcher);
 			newmlT.start();
+			threadList.add(newmlT);
+
 		}
 
 		for (MissileDestructor destructor : missileDestructors.values()) {
 			Thread newmD = new Thread(destructor);
 			newmD.start();
+			threadList.add(newmD);
 		}
 		for (MissileLauncherDestructor launcherDestructor : missileLauncherDestructors.values()) {
 			Thread newmlD = new Thread(launcherDestructor);
 			newmlD.start();
+			threadList.add(newmlD);
 		}
 	}
 
@@ -380,6 +386,12 @@ public class Game implements MissileLaunchListener, LauncherDestructListener, Mi
 	
 	@ToLog
 	public void onExit() {
+		for(MissileDestructor md: missileDestructors.values()) 
+			md.endGame();
+		for(MissileLauncherDestructor mld: missileLauncherDestructors.values()) 
+			mld.endGame();
+		for(MissileLauncher ml: missileLaunchers.values()) 
+			ml.endGame();
 		
 	}
 

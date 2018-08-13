@@ -8,12 +8,11 @@ import Logic.Missile;
 import Logic.MissileDestructor;
 import Logic.MissileLauncher;
 import Logic.MissileLauncherDestructor;
+import Logic.WarObject;
 
 public aspect ToLogAspect {
 	
-	pointcut addLauncher() : execution (@Logger.ToLog * addMissileLauncher(..));
-	pointcut addMissileDestructor() : execution (@Logger.ToLog * addMissileDestructor(..));
-	pointcut addLauncherDestructor() : execution (@Logger.ToLog * addLauncherDestructor(..));
+	pointcut add(): execution (@Logger.ToLog * add*(..));
 	
 	pointcut missileLaunchEvent() : execution (@Logger.ToLog * onMissileLaunchEvent(..));
 	pointcut missileLandEvent() : execution (@Logger.ToLog * onMissileLandEvent(..));
@@ -30,31 +29,20 @@ public aspect ToLogAspect {
 		GameLogger.close();
 	}
 	
-	//add
-	after() : addLauncher() {
-		MissileLauncher ml = (MissileLauncher) thisJoinPoint.getArgs()[0];
-		GameLogger.addFileHandler(ml, ml.getID());
-	}
-	
-	after() : addMissileDestructor() {
-		MissileDestructor md = (MissileDestructor)thisJoinPoint.getArgs()[0];
-		GameLogger.addFileHandler(md, md.getID());
-	}
-	
-	after() : addLauncherDestructor() {
-		MissileLauncherDestructor ld = (MissileLauncherDestructor)thisJoinPoint.getArgs()[0];
-		GameLogger.addFileHandler(ld, ld.getID());
+	after() : add() {
+		WarObject wo = (WarObject) thisJoinPoint.getArgs()[0];
+		GameLogger.addFileHandler(wo, wo.getID());
 	}
 	
 	//launch
-	after() : missileLaunchEvent() {
+	before() : missileLaunchEvent() {
 		Missile m = (Missile)thisJoinPoint.getArgs()[0];
 		MissileLauncher ml = m.getTheLauncher();
 		GameLogger.log(ml, Level.INFO, "missile-launcher #" + ml.getID()
 		+ " launched missile #" + m.getMissileId() );
 	}
 	
-	after() : missileLandEvent() {
+	before() : missileLandEvent() {
 		Missile m = (Missile)thisJoinPoint.getArgs()[0];
 		MissileLauncher ml = m.getTheLauncher();	
 		GameLogger.log(ml, Level.INFO, "missile #" + m.getMissileId()
@@ -64,14 +52,14 @@ public aspect ToLogAspect {
 	}
 	
 	//destruct launcher	
-	after() : launcherDestructorLaunchEvent() {
+	before() : launcherDestructorLaunchEvent() {
 		LauncherDestructTarget ldt = (LauncherDestructTarget)thisJoinPoint.getArgs()[0];
 		 MissileLauncherDestructor mld = ldt.getDestructor();
 		GameLogger.log(mld, Level.INFO, "missile-launcher-destructor #" + mld.getID()
 		+ " just started destructing launcher #" + ldt.getTargetID());
 	}
 
-	after() : launcherDestructorLandEvent() {
+	before() : launcherDestructorLandEvent() {
 		LauncherDestructTarget ldt = (LauncherDestructTarget)thisJoinPoint.getArgs()[0];
 		 MissileLauncherDestructor mld = ldt.getDestructor();
 		GameLogger.log(mld, Level.INFO, "missile-launcher-destructor #" + mld.getID()
@@ -80,15 +68,17 @@ public aspect ToLogAspect {
 	}
 
 	//destruct missile
-	after() : missileDestructorLaunchEvent() {
+	before() : missileDestructorLaunchEvent() {
 		DestructTarget dt = (DestructTarget)thisJoinPoint.getArgs()[0];
+
 		MissileDestructor md = dt.getDestructor();
 		 GameLogger.log(md, Level.INFO, "missile-destructor #" + md.getID() 
 		 + " just started destructing missile #" + dt.getTarget().getMissileId());
 	}
 		
-	after() : missileDestructorLandEvent() {
+	before() : missileDestructorLandEvent() {
 		DestructTarget dt = (DestructTarget)thisJoinPoint.getArgs()[0];
+
 		 MissileDestructor md = dt.getDestructor();		
 		 GameLogger.log( md, Level.INFO, "missile-destructor #" + md.getID()
 		 + " finished destructing missile #" + dt.getTarget().getMissileId()
