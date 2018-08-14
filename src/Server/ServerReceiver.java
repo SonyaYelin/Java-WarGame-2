@@ -3,9 +3,7 @@ package Server;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -20,17 +18,14 @@ import java.security.KeyFactory;
 import java.security.PrivateKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Vector;
 
 import javax.crypto.Cipher;
 import javax.crypto.CipherInputStream;
 import javax.crypto.spec.SecretKeySpec;
 
-import MVC.GameModelEventsListener;
 import MVC.GameUIEventsListener;
-import UI.VisualApplication;
+
 
 public class ServerReceiver implements Runnable{
 	private static final int WANTED_PORT = 29888;
@@ -38,11 +33,9 @@ public class ServerReceiver implements Runnable{
 	
 	public ServerReceiver() {
 		allListeners = new Vector<GameUIEventsListener>();
-
-
 	}
 	
-	public void registerListener(GameModelEventsListener listener) {
+	public void registerListener(GameUIEventsListener listener) {
 		allListeners.add(listener);
 	}
 	
@@ -65,7 +58,7 @@ public class ServerReceiver implements Runnable{
 	}
 	
 	
-	public void startServer() throws Exception {
+	public static void startServer() throws Exception {
 		System.out.println("Running server...");
 		ServerSocket listener = new ServerSocket(getAvailablePort(WANTED_PORT));
 		try {
@@ -109,6 +102,7 @@ public class ServerReceiver implements Runnable{
 		private OutputStream out;
 
 		private void sendPublicKey() throws IOException {
+			
 			StringBuilder messageHeader = new StringBuilder();
 			messageHeader.append("PUBLIC KEY\n");
 			File publicKeyFile = new File("public.der");
@@ -214,7 +208,7 @@ public class ServerReceiver implements Runnable{
 					System.out.println("Received File");
 					System.out.println("Name: " + file.getName());
 					System.out.println("Size:" + file.length());
-					ProtocolUtilities.handleFile(file);
+					//ProtocolUtilities.handleFile(file);
 					out.write("SUCCESS\nsuccessful transmission\n\n".getBytes("ASCII"));
 					out.flush();
 					readFile(file);
@@ -237,18 +231,21 @@ public class ServerReceiver implements Runnable{
 		}
 
 		private void deleteFile(File file) {
-			file.deleteOnExit();
+			file.delete();
 		}
 		
 		private void readFile(File file) {
+			System.out.println("in file reader");
 		    try {
 		    	for (String line : Files.readAllLines(Paths.get(file.getAbsolutePath()))) {
-	    		String[] splitStr = line.split("\\s+");
-	    			if(splitStr[0] == "addMissileLauncher") {
+		    		System.out.println("Currently dealing with line: " + line);
+		    		String[] splitStr = line.split("\\s+");
+		    		System.out.println(splitStr[0]);
+	    			if("addMissileLauncher".equals(splitStr[0])) {
 	    				addMissileLauncher(splitStr[1]);
-	    			} else if(splitStr[0] == "launchMissile") {
+	    			} else if("launchMissile".equals(splitStr[0])) {
 	    				launchMissile(splitStr[1], splitStr[2], splitStr[3], Integer.parseInt(splitStr[4]));
-	    			} else if(splitStr[0] == "destructMissile") {
+	    			} else if("destructMissile".equals(splitStr[0])) {
 	    				destructMissile(splitStr[1], splitStr[2]);
 	    			}
 	    		}

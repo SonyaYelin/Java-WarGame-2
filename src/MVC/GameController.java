@@ -30,6 +30,11 @@ public class GameController implements GameModelEventsListener, GameUIEventsList
 		
 		this.server = new ServerReceiver();
 		this.server.registerListener(this);
+		try {
+			this.server.startServer();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		ApplicationContext	theContext = new ClassPathXmlApplicationContext(DB_CONFIG);
 		db = (IDB) theContext.getBean(DATA_BASE);

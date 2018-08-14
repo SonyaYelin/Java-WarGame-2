@@ -1,22 +1,17 @@
 package Server;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class ProtocolUtilities {
 
 	public static final int KEY_SIZE_AES = 128;
 	
-	public static void printByteArray(String msg, byte[] byteArray) { //used for debugging
+	//For debugging
+	public static void printByteArray(String msg, byte[] byteArray) { 
 		System.out.println(msg);
 		System.out.println("Total: " + byteArray.length + " bytes.");
 		StringBuilder result = new StringBuilder();
@@ -30,28 +25,7 @@ public class ProtocolUtilities {
 		System.out.println(result.toString());	
 	}
 	
-	/**
-	 * Forwards the bytes from one stream to another
-	 * @param source - the input stream from which we are sending
-	 * @param destination - the output stream that we are sending to
-	 * @throws IOException
-	 */
-	public static void sendBytes(InputStream source, OutputStream destination) throws IOException {
-		byte[] buffer = new byte[1024];
-		while(true) {
-			int readAmount = source.read(buffer);
-			if (readAmount == -1) break;
-			destination.write(buffer,0,readAmount);
-		}
-	}
-	
-	/**
-	 * Attempts to forward <code>len</code> bytes from one stream to another
-	 * @param source - the input stream from which we are sending
-	 * @param destination - the output stream that we are sending to
-	 * @param len - the maximum number of bytes to send from source to destination
-	 * @throws IOException
-	 */
+	//Send len bytes to stream
 	public static void sendBytes(InputStream source, OutputStream destination,long len) throws IOException {
 		byte[] buffer = new byte[1024];
 		long remaining = len;
@@ -65,13 +39,7 @@ public class ProtocolUtilities {
 	}
 	
 	
-	/**
-	 * Consumes just the ASCII encoded header from the stream (but leaves the body untouched). This also includes consuming
-	 * the two new line characters "\n\n" that separate the body from the header.
-	 * @param in - the input stream (from a socket)
-	 * @return ArrayList that contains the header parts separated.
-	 * @throws IOException
-	 */
+	//Read header to know the file details
 	public static ArrayList<String> consumeAndBreakHeader(InputStream in) throws IOException {
 		ArrayList<Character> pipeline = new ArrayList<>();
 		StringBuilder header = new StringBuilder();
@@ -97,48 +65,4 @@ public class ProtocolUtilities {
 		scanner.close();
 		return headerParts;
 	}
-	
-	public static void handleFile(File file) {
-		Path path = Paths.get(file.getName());
-		List<String> lines;
-		try {
-			lines = Files.readAllLines(path, StandardCharsets.UTF_8);
-			int position =  0; 
-			String organizationName = lines.get(position);
-			String endpointIP = lines.get(position+1);
-			lines.remove(position);
-			lines.remove(position);
-			path = Paths.get(organizationName + "/" + endpointIP + "/" + file.getName());
-			createDirectory(organizationName);
-			createDirectory(organizationName + "/" + endpointIP);
-			Files.write(path, lines, StandardCharsets.UTF_8);
-			file.delete();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
-	
-	public static void createDirectory(String directoryName) {
-		File theDir = new File(directoryName);
-
-		// if the directory does not exist, create it
-		if (!theDir.exists()) {
-		    System.out.println("creating directory: " + theDir.getName());
-		    boolean result = false;
-
-		    try{
-		        theDir.mkdir();
-		        result = true;
-		    } 
-		    catch(SecurityException se){
-		        System.out.println("Exception error " + se);
-		    }        
-		    if(result) {    
-		        System.out.println(directoryName + " directory created");  
-		    }
-		}
-	}
-	
 }
