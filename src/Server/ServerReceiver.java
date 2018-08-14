@@ -49,7 +49,6 @@ public class ServerReceiver implements Runnable{
 		theApplication.getGamePanel().destructMissile(missileIdToDestruct, missileDestructorId);
 	}
 	
-	
 	public void startServer() throws Exception {
 		System.out.println("Running server...");
 		ServerSocket listener = new ServerSocket(getAvailablePort(WANTED_PORT));
