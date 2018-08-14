@@ -1,2 +1,4 @@
-2018-08-10T16:34:14.8487462: missile #M3 launched by missile-launcher #L102 landed, hit target: true is detructd: false
-2018-08-10T16:34:18.8994271: missile #M4 launched by missile-launcher #L102 landed, hit target: false is detructd: true
+2018-08-14T11:48:09.6603921: missile-launcher #L102 launched missile #M3
+2018-08-14T11:48:12.668305: missile #M3 launched by missile-launcher #L102 landed, hit target: true is detructd: false
+2018-08-14T11:48:14.6597143: missile-launcher #L102 launched missile #M4
+2018-08-14T11:48:16.6716544: missile #M4 launched by missile-launcher #L102 landed, hit target: false is detructd: true

@@ -33,6 +33,7 @@ public class ServerReceiver implements Runnable{
 	
 	public ServerReceiver() {
 		allListeners = new Vector<GameUIEventsListener>();
+		System.out.println("Running server...");
 	}
 	
 	public void registerListener(GameUIEventsListener listener) {
@@ -40,6 +41,7 @@ public class ServerReceiver implements Runnable{
 	}
 	
 	private static void addMissileLauncher(String id) {
+		
 		for (GameUIEventsListener g : allListeners) {
 			g.addMissileLauncherFromUI(id);
 		}
@@ -57,17 +59,12 @@ public class ServerReceiver implements Runnable{
 		}
 	}
 	
-<<<<<<< HEAD
-	public void startServer() throws Exception {
-=======
-	
 	public static void startServer() throws Exception {
->>>>>>> ac29d096a793de041e87794d78a4f1abfddf3eec
-		System.out.println("Running server...");
 		ServerSocket listener = new ServerSocket(getAvailablePort(WANTED_PORT));
 		try {
 			while (true) {
-				new Handler(listener.accept()).start();
+				Socket s = listener.accept();
+				new Handler(s).start();
 			}
 		} finally {
 			listener.close();
@@ -81,6 +78,7 @@ public class ServerReceiver implements Runnable{
 	    while (!isPortAvailable(Finalport)) {
 	    	Finalport =  (int)(Math.random() * range) + min;
 	    }
+	    System.out.println("listening on port: ");
 	    return Finalport;
 	}
 
@@ -216,7 +214,7 @@ public class ServerReceiver implements Runnable{
 					out.write("SUCCESS\nsuccessful transmission\n\n".getBytes("ASCII"));
 					out.flush();
 					readFile(file);
-					deleteFile(file);
+					//deleteFile(file);
 					socket.close();
 				} catch (GeneralSecurityException e) {
 					sendErrorMessage("Failed to decrypt AES key and/or file content.");
