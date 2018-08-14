@@ -229,7 +229,6 @@ public class Game implements MissileLaunchListener, LauncherDestructListener, Mi
 		for (GameModelEventsListener g : allListeners) {
 			g.addMissileDestructorInModel(id);
 		}
-
 	}
 
 	private void fireAddMissileLauncherDestructor(String id, String type) {

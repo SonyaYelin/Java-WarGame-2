@@ -5,6 +5,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import DB.IDB;
 import Logic.Game;
+import Server.ServerReceiver;
 import UI.GameUI;
 
 public class GameController implements GameModelEventsListener, GameUIEventsListener {
@@ -16,6 +17,8 @@ public class GameController implements GameModelEventsListener, GameUIEventsList
 	private GameUI 				theGameUI;
 	
 	private IDB 				db;
+	
+	private ServerReceiver 		server;
 
 	
 	public GameController(GameUI theGameUI) {
@@ -24,6 +27,14 @@ public class GameController implements GameModelEventsListener, GameUIEventsList
 
 		theGame.registerListener(this);
 		theGameUI.registerListener(this);
+		
+		this.server = new ServerReceiver();
+		this.server.registerListener(this);
+		try {
+			this.server.startServer();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		ApplicationContext	theContext = new ClassPathXmlApplicationContext(DB_CONFIG);
 		db = (IDB) theContext.getBean(DATA_BASE);
