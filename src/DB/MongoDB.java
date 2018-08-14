@@ -1,6 +1,5 @@
 package DB;
 
-
 import org.bson.Document;
 
 import com.mongodb.MongoClient;
@@ -9,6 +8,8 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.UpdateOptions;
 import com.mongodb.client.model.Updates;
+import com.mongodb.MongoClient;
+
 
 public class MongoDB implements IDB{
 
@@ -26,7 +27,6 @@ public class MongoDB implements IDB{
 
 	@Override
 	public void closeDB() {
-		
 		mongoClient.close();		
 	}
 
